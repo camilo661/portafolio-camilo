@@ -281,22 +281,6 @@
   .meter-bar i { width: 14px; height: 4px; border-radius: 2px; background: rgba(255, 255, 255, .45); }
   .meter-bar i.done { background: var(--teal); }
 
-  .foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 3; display: flex; justify-content: space-between; padding: 22px 28px; pointer-events: none; font: 400 12px var(--f-body); color: var(--ink-2); transition: opacity .5s; }
-  .foot p { margin: 0; }
-  body.is-focus .foot { opacity: 0; }
-
-  /* ───────── Loader ───────── */
-  .loader {
-    position: fixed; inset: 0; z-index: 50;
-    background: linear-gradient(160deg, var(--bg-1), var(--bg-2) 55%, var(--bg-3));
-    display: grid; place-content: center; justify-items: center; gap: 22px;
-    transition: opacity 1s var(--ease), visibility 1s;
-  }
-  body:not(.is-loading) .loader { opacity: 0; visibility: hidden; }
-  .loader-mono { font: 200 72px/1 var(--f-disp); letter-spacing: -.03em; color: #fff; }
-  .loader-bar { width: 200px; height: 2px; border-radius: 2px; background: rgba(255, 255, 255, .35); overflow: hidden; }
-  .loader-bar i { display: block; height: 100%; background: #fff; transform-origin: left; transform: scaleX(var(--load, 0)); }
-  .loader-txt { display: flex; justify-content: space-between; width: 200px; font: 400 11.5px var(--f-body); color: rgba(255, 255, 255, .85); }
 
   /* ───────── Panel ───────── */
   .panel {
@@ -436,7 +420,7 @@
     .brand-txt strong { font-size: 13px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .brand-txt em { font-size: 11px; white-space: nowrap; }
     .meter { display: none; }
-    #btnTour, .meter-txt, .foot, .labels, .lines, .reticle-tag { display: none; }
+    #btnTour, .meter-txt, .labels, .lines, .reticle-tag { display: none; }
     .meter { margin-right: 0; }
     .meter-bar i { width: 6px; }
     .btn-glass { padding: 9px 14px; font-size: 12.5px; }
@@ -530,8 +514,6 @@
     background: radial-gradient(80% 60% at 50% 30%, rgba(92, 185, 195, .12), transparent 70%), rgba(255, 255, 255, .03);
     box-shadow: none;
   }
-  [data-theme="dark"] .loader-bar { background: rgba(255, 255, 255, .15); }
-  [data-theme="dark"] .loader-bar i { background: var(--teal); }
   @media (max-width: 819px) {
     [data-theme="dark"] .top { background: linear-gradient(180deg, rgba(22, 31, 37, .94) 50%, transparent); }
     [data-theme="dark"] .dock button.on { background: var(--teal); color: #fff; }
@@ -539,7 +521,7 @@
   }
 
   /* Transición suave al cambiar de tema */
-  .theme-anim :is(.loader, .top, .brand-mark, .lbl, .btn-glass, .btn-theme, .btn-solid, .card, .chip, .stats div, .proj, .todo, .dock button, .pn-close, .pn-title, .lead) {
+  .theme-anim :is(.top, .brand-mark, .lbl, .btn-glass, .btn-theme, .btn-solid, .card, .chip, .stats div, .proj, .todo, .dock button, .pn-close, .pn-title, .lead) {
     transition: background-color .5s, color .5s, border-color .5s, box-shadow .5s;
   }
 
@@ -592,7 +574,6 @@
   [data-theme="dark"] .ih-ph { background: radial-gradient(80% 60% at 50% 30%, rgba(92, 185, 195, .12), transparent 70%), rgba(255, 255, 255, .03); }
   [data-theme="dark"] .ih-photo img { box-shadow: 0 34px 60px -26px rgba(0, 0, 0, .9); }
 
-  body.is-assembled .foot p:first-child { opacity: 0; }
 
   @media (max-width: 1180px) and (min-width: 820px) {
     .ih-wrap { grid-template-columns: 1fr; align-content: center; gap: 22px; }

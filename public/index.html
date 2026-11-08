@@ -15,10 +15,10 @@
 </head>
 <body class="is-loading">
 
-  <div class="loader" aria-hidden="true">
-    <div class="loader-mono">CC</div>
-    <div class="loader-bar"><i></i></div>
-    <div class="loader-txt"><span>Desensamblando</span><span class="loader-pct">0%</span></div>
+  <div class="loader fixed inset-0 z-50 grid place-content-center justify-items-center gap-[22px] bg-[linear-gradient(160deg,var(--bg-1),var(--bg-2)_55%,var(--bg-3))] [transition:opacity_1s_var(--ease),visibility_1s] not-in-[.is-loading]:invisible not-in-[.is-loading]:opacity-0" aria-hidden="true">
+    <div class="font-disp text-[72px] leading-none font-extralight tracking-[-.03em] text-white">CC</div>
+    <div class="h-[2px] w-[200px] overflow-hidden rounded-[2px] bg-[rgba(255,255,255,.35)] dark:bg-[rgba(255,255,255,.15)]"><i class="block h-full origin-left bg-white [transform:scaleX(var(--load,0))] dark:bg-teal"></i></div>
+    <div class="loader-txt font-body flex w-[200px] justify-between text-[11.5px] font-normal text-[rgba(255,255,255,.85)]"><span>Desensamblando</span><span class="loader-pct">0%</span></div>
   </div>
 
   <div class="bg" aria-hidden="true">
@@ -52,9 +52,9 @@
     </nav>
   </header>
 
-  <footer class="foot">
-    <p>Toca una pieza para inspeccionarla · ← → para navegar</p>
-    <p>CC-17 Pro Max · Edición 2026</p>
+  <footer class="font-body pointer-events-none fixed inset-x-0 bottom-0 z-3 flex justify-between px-7 py-[22px] text-[12px] font-normal text-ink-2 [transition:opacity_.5s] in-[.is-focus]:opacity-0 max-[820px]:hidden">
+    <p class="m-0 in-[.is-assembled]:opacity-0">Toca una pieza para inspeccionarla · ← → para navegar</p>
+    <p class="m-0">CC-17 Pro Max · Edición 2026</p>
   </footer>
 
   <nav class="dock" id="dock" aria-label="Componentes"></nav>
