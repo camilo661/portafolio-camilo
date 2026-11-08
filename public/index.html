@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Camilo Castro — Portafolio</title>
+  <meta name="description" content="Portafolio de Camilo Andrés Castro Acosta, Pasto, Nariño: un iPhone 17 Pro Max desensamblado, pieza por pieza.">
+  <meta name="theme-color" content="#93a8b2">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2216%22 fill=%22%2393a8b2%22/%3E%3Ctext x=%2232%22 y=%2241%22 font-family=%22Arial%22 font-size=%2224%22 fill=%22%23ffffff%22 text-anchor=%22middle%22%3ECC%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Instrument+Serif:ital@0;1&family=Outfit:wght@200;300;400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>try { if (localStorage.getItem('cc-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch (e) {}</script>
+</head>
+<body class="is-loading">
+
+  <div class="loader" aria-hidden="true">
+    <div class="loader-mono">CC</div>
+    <div class="loader-bar"><i></i></div>
+    <div class="loader-txt"><span>Desensamblando</span><span class="loader-pct">0%</span></div>
+  </div>
+
+  <div class="bg" aria-hidden="true">
+    <div class="bg-glow"></div>
+    <div class="bg-word">Castro</div>
+    <div class="bg-floor"></div>
+  </div>
+
+  <main class="stage" id="stage" aria-label="iPhone 17 Pro Max desensamblado. Cada componente abre una sección del portafolio."></main>
+  <div class="stage ghost" id="ghost" aria-hidden="true" inert></div>
+
+  <section class="ih" id="ih" aria-label="Presentación"></section>
+
+  <svg class="lines" id="lines" aria-hidden="true"></svg>
+  <div class="labels" id="labels"></div>
+  <div class="reticle" id="reticle" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="reticle-tag"></span></div>
+
+  <header class="top">
+    <a class="brand" href="#" data-home>
+      <span class="brand-mark">CC</span>
+      <span class="brand-txt"><strong>Camilo Andrés Castro Acosta</strong><em>Portafolio · Pasto, Nariño</em></span>
+    </a>
+    <nav class="top-actions">
+      <div class="meter" id="meter"></div>
+      <button class="btn-glass" id="btnAssemble">Ensamblar</button>
+      <button class="btn-solid" id="btnTour">Recorrido <span>→</span></button>
+      <button class="btn-theme" id="btnTheme" aria-label="Cambiar a tema oscuro" aria-pressed="false">
+        <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"/></svg>
+        <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.6A8.3 8.3 0 0 1 9.4 4a8.3 8.3 0 1 0 10.6 10.6z"/></svg>
+      </button>
+    </nav>
+  </header>
+
+  <footer class="foot">
+    <p>Toca una pieza para inspeccionarla · ← → para navegar</p>
+    <p>CC-17 Pro Max · Edición 2026</p>
+  </footer>
+
+  <nav class="dock" id="dock" aria-label="Componentes"></nav>
+
+  <aside class="panel" id="panel" aria-hidden="true" aria-labelledby="pnTitle">
+    <header class="pn-head">
+      <span class="pn-code" id="pnCode"></span>
+      <button class="pn-close" id="pnClose" aria-label="Cerrar y volver al teléfono">✕</button>
+    </header>
+    <div class="pn-scroll" id="pnScroll">
+      <p class="pn-eyebrow" id="pnEyebrow"></p>
+      <h2 class="pn-title" id="pnTitle"></h2>
+      <div class="pn-body" id="pnBody"></div>
+    </div>
+    <footer class="pn-nav">
+      <button class="pn-step" id="pnPrev"><span>←</span><em></em></button>
+      <span class="pn-count" id="pnCount"></span>
+      <button class="pn-step" id="pnNext"><em></em><span>→</span></button>
+    </footer>
+  </aside>
+
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
