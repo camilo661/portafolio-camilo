@@ -53,6 +53,8 @@ export interface Project {
   tech: string[];
   images: Image[];
   links: Link[];
+  /** 'watch': capturas cuadradas de reloj redondo; se muestran como esfera */
+  frame?: 'watch';
 }
 export interface ProjectsData {
   intro: Maybe<string>;

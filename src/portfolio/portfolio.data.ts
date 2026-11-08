@@ -120,7 +120,14 @@ export const PORTFOLIO: Portfolio = {
             description:
               'Control remoto universal por voz para relojes Wear OS. Le hablas al reloj («sube el volumen 5», «abre Netflix», «apaga la tele») y controla el televisor por Wi‑Fi. Encuentra solo los televisores de la red y funciona con Samsung, LG, Sony, Roku y Android TV. Las órdenes simples se entienden sin internet y las frases libres las interpreta una IA.',
             tech: ['Kotlin', 'Compose for Wear OS', 'WebSocket', 'SSDP / mDNS', 'Claude API'],
-            images: [],
+            frame: 'watch',
+            images: [
+              { src: 'assets/tucontrol/tucontrol-inicio.jpg', alt: 'Pantalla de inicio de TuControl en el reloj: tu control remoto por voz con IA' },
+              { src: 'assets/tucontrol/tucontrol-pasos.jpg', alt: 'Pasos para empezar: conectar el reloj y el TV a la misma red Wi‑Fi, vincular el televisor y hablar' },
+              { src: 'assets/tucontrol/tucontrol-empezar.jpg', alt: 'Botón Empezar y créditos: creado por Camilo Andrés Castro Acosta' },
+              { src: 'assets/tucontrol/tucontrol-conectado.jpg', alt: 'Televisor conectado y botón de micrófono: toca para hablar' },
+              { src: 'assets/tucontrol/tucontrol-escuchando.jpg', alt: 'TuControl escuchando una orden de voz' },
+            ],
             links: [
               { label: 'Ver en GitHub', href: 'https://github.com/camilo661/tucontrol', kind: 'github', primary: true },
             ],
