@@ -10,6 +10,7 @@ Todo lo que hay que reunir para llenar el portafolio. Sigue la misma estructura 
 - Nombre: **Camilo Andrés Castro Acosta**
 - Ubicación: **Pasto, Nariño, Colombia**
 - Frase titular: **Software, telefonía e innovación**
+- Fotos: **cuerpo completo** (portada), **estilo hoja de vida** (panel de Inicio) y **avatar** (cabecera)
 - Presentación: **Estudiante de Ingeniería de Software y técnico en telefonía móvil, con más de 7 años de experiencia en microsoldadura y software.**
 - Proyecto **Turbo Ratas** (texto, tecnologías, 5 capturas, demo y repositorio)
 - Idioma: Español (nativo)
