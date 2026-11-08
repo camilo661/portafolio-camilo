@@ -18,6 +18,8 @@ Todo lo que hay que reunir para llenar el portafolio. Sigue la misma estructura 
 - Sobre mí: frase, dos párrafos y tres áreas de enfoque (redactados a partir de tu perfil; revísalos)
 - **22 proyectos públicos** más, en formato compacto con botón de GitHub (y demo con captura cuando están publicados)
 - Rol: **Desarrollador Full Stack**
+- Semestre: **5.º de Ingeniería de Software**
+- IA y asistentes: **Claude, ChatGPT, Gemini, GitHub Copilot y Perplexity**
 - Idiomas: **Español** (nativo) · **Inglés** (intermedio, nivel 5)
 - Cifras de Inicio: **6 lenguajes** · **Inglés nivel 5**
 - Habilidades con íconos: **Java, Kotlin, JavaScript, TypeScript, Python, Swift** · HTML5, CSS3, Tailwind CSS · Node.js, NestJS · Git, GitHub, Docker
@@ -50,7 +52,6 @@ Frontend:
 Backend:
 Despliegue y control de versiones:
 Bases de datos:
-IA y asistentes:
 ```
 
 ## 04 · Proyectos (Almacenamiento NAND)
