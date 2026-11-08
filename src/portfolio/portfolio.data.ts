@@ -113,6 +113,7 @@ export const PORTFOLIO: Portfolio = {
             tech: ['Kotlin', 'Compose for Wear OS', 'WebSocket', 'SSDP / mDNS', 'Claude API'],
             images: [],
             links: [
+              { label: 'Ver en GitHub', href: 'https://github.com/camilo661/tucontrol', kind: 'github', primary: true },
             ],
           },
           {
