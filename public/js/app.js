@@ -470,7 +470,7 @@ function start(D) {
     hero(d) {
       const o = D.owner, parts = o.name.split(' ');
       const photo = d.photo
-        ? `<img class="hero-photo" src="${esc(d.photo)}" alt="Foto de ${esc(o.name)}">`
+        ? `<img class="hero-photo object-top" src="${esc(d.photo)}" alt="Foto de ${esc(o.name)}" decoding="async">`
         : `<div class="hero-photo is-empty" role="img" aria-label="Espacio para la foto de perfil"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="11"/><path d="M12 56c2-11 10-17 20-17s18 6 20 17"/></svg><span>Tu foto aquí</span></div>${need('Foto de perfil', 'vertical o cuadrada, mínimo 800 × 1000 px, buena luz y fondo limpio')}`;
       let h = `<div class="hero"><div class="hero-top">${photo}
         <h3 class="hero-name"><span>${esc(parts.slice(0, 2).join(' '))}</span><em>${esc(parts.slice(2).join(' '))}</em></h3></div>
@@ -748,11 +748,18 @@ function start(D) {
             <button class="btn-glass" data-hs="display">Conóceme</button>
           </div>
         </div>
-        <figure class="ih-photo">${h.photo
-          ? `<img src="${esc(h.photo)}" alt="Foto de ${esc(o.name)}">`
+        <figure class="ih-photo">${h.photoFull || h.photo
+          ? `<img class="ih-img" src="${esc(h.photoFull || h.photo)}" alt="Foto de ${esc(o.name)}" decoding="async">`
           : `<div class="ih-ph" role="img" aria-label="Espacio para la foto de perfil"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="11"/><path d="M12 56c2-11 10-17 20-17s18 6 20 17"/></svg><span>Tu foto aquí</span></div>`}</figure>
       </div>`;
   })();
+
+  /* ───────────── Avatar de la cabecera ───────────── */
+  if (D.owner.avatar) {
+    const mark = $('.brand-mark');
+    mark.innerHTML = `<img src="${esc(D.owner.avatar)}" alt="" class="block size-full rounded-full object-cover">`;
+    mark.classList.add('overflow-hidden', 'p-0');
+  }
 
   /* ───────────── Reloj de la pantalla ───────────── */
   function clock() {

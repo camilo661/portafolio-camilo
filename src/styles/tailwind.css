@@ -528,6 +528,8 @@
   .ih-text .actions { margin-top: 8px; }
 
   .ih-photo { margin: 0; width: clamp(200px, 19vw, 300px); }
+  /* Foto completa de la portada: se muestra entera, sin recortar */
+  .ih-photo .ih-img { aspect-ratio: auto; height: auto; }
   .ih-photo img, .ih-ph {
     display: block; width: 100%; aspect-ratio: 4 / 5; border-radius: 32px; object-fit: cover;
     border: 1px solid var(--glass-b); box-shadow: 0 34px 60px -30px rgba(21, 34, 42, .6);
