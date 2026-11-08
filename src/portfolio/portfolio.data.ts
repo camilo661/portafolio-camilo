@@ -15,6 +15,7 @@ export const PORTFOLIO: Portfolio = {
     first: 'Camilo',
     monogram: 'CC',
     location: 'Pasto, Nariño, Colombia',
+    avatar: 'assets/camilo/camilo-avatar.jpg',
   },
 
   sections: [
@@ -26,7 +27,8 @@ export const PORTFOLIO: Portfolio = {
         tagline: 'Software, telefonía e innovación',
         intro: 'Estudiante de Ingeniería de Software y técnico en telefonía móvil, con más de 7 años de experiencia en microsoldadura y software.',
         cv: null,             // ej. 'assets/CamiloCastroCV.pdf'
-        photo: null,          // ej. 'assets/camilo.jpg'  (vertical 4:5, mínimo 800 × 1000 px)
+        photo: 'assets/camilo/camilo-hoja-de-vida.jpg',
+        photoFull: 'assets/camilo/camilo-completa.jpg',
         stats: [              // cifras destacadas
           { value: null, label: 'Semestre' },
           { value: null, label: 'Lenguajes' },

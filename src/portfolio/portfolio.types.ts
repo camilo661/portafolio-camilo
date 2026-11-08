@@ -11,6 +11,8 @@ export interface Owner {
   first: string;
   monogram: string;
   location: string;
+  /** Foto pequeña y cuadrada para la cabecera */
+  avatar: Maybe<string>;
 }
 
 export interface Link { label: string; href: string; primary?: boolean }
@@ -20,7 +22,10 @@ export interface HeroData {
   tagline: Maybe<string>;
   intro: Maybe<string>;
   cv: Maybe<string>;
+  /** Foto estilo hoja de vida (panel de Inicio) */
   photo: Maybe<string>;
+  /** Foto de cuerpo completo (portada) */
+  photoFull: Maybe<string>;
   stats: { value: Maybe<string>; label: string }[];
 }
 export interface AboutData { headline: Maybe<string>; paragraphs: string[]; focus: string[] }
