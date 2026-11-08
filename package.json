@@ -1,0 +1,35 @@
+{
+  "name": "portafolio-camilo",
+  "version": "1.0.0",
+  "description": "Portafolio de Camilo Andrés Castro Acosta: un iPhone 17 Pro Max desensamblado, pieza por pieza. HTML + Tailwind CSS + NestJS.",
+  "author": "Camilo Andrés Castro Acosta",
+  "private": true,
+  "license": "UNLICENSED",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/styles/tailwind.css -o ./public/css/styles.css --minify",
+    "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./public/css/styles.css --watch",
+    "build": "npm run build:css && nest build",
+    "start": "node dist/main.js",
+    "start:dev": "npm run build:css && nest start --watch"
+  },
+  "dependencies": {
+    "@nestjs/common": "^12.4.0",
+    "@nestjs/core": "^12.4.0",
+    "@nestjs/platform-express": "^12.4.0",
+    "@nestjs/serve-static": "^12.1.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^12.0.12",
+    "@tailwindcss/cli": "^4.3.5",
+    "@types/express": "^5.0.6",
+    "@types/node": "^26.6.6",
+    "tailwindcss": "^4.3.5",
+    "typescript": "~6.0.2"
+  }
+}
