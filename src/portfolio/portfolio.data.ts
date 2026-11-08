@@ -15,6 +15,7 @@ export const PORTFOLIO: Portfolio = {
     first: 'Camilo',
     monogram: 'CC',
     location: 'Pasto, Nariño, Colombia',
+    role: 'Desarrollador Full Stack',
     avatar: 'assets/camilo/camilo-avatar.jpg',
   },
 
@@ -32,7 +33,7 @@ export const PORTFOLIO: Portfolio = {
         stats: [              // cifras destacadas
           { value: null, label: 'Semestre' },
           { value: null, label: 'Lenguajes' },
-          { value: null, label: 'Inglés' },
+          { value: 'Nivel 5', label: 'Inglés' },
         ],
       },
     },
@@ -53,12 +54,25 @@ export const PORTFOLIO: Portfolio = {
       hs: 'ram', part: 'RAM', key: 'habilidades', type: 'skills', accent: 'steel',
       eyebrow: 'Habilidades técnicas', title: 'Stack en memoria',
       data: {
-        intro: 'Tecnologías y herramientas con las que he trabajado.',
+        intro: 'Desarrollador Full Stack: tecnologías y herramientas con las que he trabajado.',
         groups: [
-          { name: 'Lenguajes de programación', items: [] },
-          { name: 'Frontend', items: [] },
-          { name: 'Backend', items: [] },
-          { name: 'Despliegue y control de versiones', items: [] },
+          {
+            name: 'Lenguajes de programación',
+            items: [
+              { name: 'Java', icon: 'assets/icons/java.svg' },
+              { name: 'Kotlin', icon: 'assets/icons/kotlin.svg' },
+              { name: 'JavaScript', icon: 'assets/icons/javascript.svg' },
+              { name: 'TypeScript', icon: 'assets/icons/typescript.svg' },
+              { name: 'Python', icon: 'assets/icons/python.svg' },
+              { name: 'Swift', icon: 'assets/icons/swift.svg' },
+            ],
+          },
+          { name: 'Frontend', items: [{ name: 'HTML5', icon: 'assets/icons/html5.svg' }, { name: 'CSS3', icon: 'assets/icons/css3.svg' }, { name: 'Tailwind CSS', icon: 'assets/icons/tailwindcss.svg' }] },
+          { name: 'Backend', items: [{ name: 'Node.js', icon: 'assets/icons/nodejs.svg' }, { name: 'NestJS', icon: 'assets/icons/nestjs.svg' }] },
+          {
+            name: 'Despliegue y control de versiones',
+            items: [{ name: 'Git', icon: 'assets/icons/git.svg' }, { name: 'GitHub', icon: 'assets/icons/github.svg', mono: true }, { name: 'Docker', icon: 'assets/icons/docker.svg' }],
+          },
           { name: 'Bases de datos', items: [] },
           { name: 'IA y asistentes', items: [] },
         ],
@@ -146,7 +160,10 @@ export const PORTFOLIO: Portfolio = {
       hs: 'vapor', part: 'Refrigeración', key: 'certificados', type: 'learning', accent: 'steel',
       eyebrow: 'Aprendizaje continuo', title: 'Idiomas y certificados',
       data: {
-        languages: [{ name: 'Español', level: 'Nativo' }, { name: 'Inglés', level: null }],
+        languages: [
+          { name: 'Español', level: 'Nativo', detail: 'Lengua materna' },
+          { name: 'Inglés', level: 'Intermedio', detail: 'Nivel 5' },
+        ],
         experiences: [],      // comunicación / monitorías / audiovisual: { year, title, org, kind }
         certificates: [],     // { year, title, org, link }
       },

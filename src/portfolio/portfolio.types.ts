@@ -11,6 +11,8 @@ export interface Owner {
   first: string;
   monogram: string;
   location: string;
+  /** Rol profesional, ej. 'Desarrollador Full Stack' */
+  role: Maybe<string>;
   /** Foto pequeña y cuadrada para la cabecera */
   avatar: Maybe<string>;
 }
@@ -29,7 +31,14 @@ export interface HeroData {
   stats: { value: Maybe<string>; label: string }[];
 }
 export interface AboutData { headline: Maybe<string>; paragraphs: string[]; focus: string[] }
-export interface SkillsData { intro: string; groups: { name: string; items: string[] }[] }
+export interface SkillItem {
+  name: string;
+  /** Ruta del ícono SVG en public/ */
+  icon?: string;
+  /** Ícono monocromo: se invierte en el tema oscuro */
+  mono?: boolean;
+}
+export interface SkillsData { intro: string; groups: { name: string; items: (string | SkillItem)[] }[] }
 export interface Project {
   kicker: string;
   title: string;
@@ -63,7 +72,7 @@ export interface MoreData {
   }[];
 }
 export interface LearningData {
-  languages: { name: string; level: Maybe<string> }[];
+  languages: { name: string; level: Maybe<string>; detail?: string }[];
   experiences: { year: string; title: string; org: string; kind: string }[];
   certificates: { year: string; title: string; org: string; link?: string }[];
 }
