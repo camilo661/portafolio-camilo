@@ -31,7 +31,7 @@ export const PORTFOLIO: Portfolio = {
         photo: 'assets/camilo/camilo-hoja-de-vida.jpg',
         photoFull: 'assets/camilo/camilo-completa.jpg',
         stats: [              // cifras destacadas
-          { value: null, label: 'Semestre' },
+          { value: '5.º', label: 'Semestre' },
           { value: '6', label: 'Lenguajes' },
           { value: 'Nivel 5', label: 'Inglés' },
         ],
