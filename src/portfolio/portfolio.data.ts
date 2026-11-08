@@ -353,6 +353,50 @@ export const PORTFOLIO: Portfolio = {
                 { label: 'GitHub', href: 'https://github.com/camilo661/05-03-2026', kind: 'github' },
               ],
             },
+            {
+              kicker: 'Full stack · proyecto final',
+              title: 'Sistema de recaudo de préstamos',
+              description:
+                'Backend para administrar préstamos de un negocio de cobros: clientes, cuotas, pagos, recaudadores y reportes, con inicio de sesión por roles. Incluye la documentación y los diagramas de arquitectura del sistema.',
+              tech: ['Java', 'Spring Boot', 'Spring Security'],
+              images: [],
+              links: [
+                { label: 'GitHub', href: 'https://github.com/camilo661/PROYECTOFINALDISE-O', kind: 'github' },
+              ],
+            },
+            {
+              kicker: 'Java · Swing',
+              title: 'Cafetería universitaria',
+              description:
+                'Aplicación de escritorio para tomar pedidos en una cafetería: menú, carrito, envío del pedido a cocina y factura.',
+              tech: ['Java', 'Swing'],
+              images: [],
+              links: [
+                { label: 'GitHub', href: 'https://github.com/camilo661/TALLER-BLOQUE-2', kind: 'github' },
+              ],
+            },
+            {
+              kicker: 'Java · herencia',
+              title: 'Editorial',
+              description:
+                'Catálogo de una editorial que modela libros, discos y videos como publicaciones, con su diagrama de clases.',
+              tech: ['Java'],
+              images: [],
+              links: [
+                { label: 'GitHub', href: 'https://github.com/camilo661/DISE-O-TALLER-', kind: 'github' },
+              ],
+            },
+            {
+              kicker: 'Web · HTML',
+              title: 'Game Dashboard',
+              description:
+                'Interfaz de una tienda de videojuegos con lanzamientos, juegos populares, recomendaciones y partidas en vivo.',
+              tech: ['HTML', 'Tailwind CSS'],
+              images: [],
+              links: [
+                { label: 'GitHub', href: 'https://github.com/camilo661/Taller1', kind: 'github' },
+              ],
+            },
         ],
       },
     },
