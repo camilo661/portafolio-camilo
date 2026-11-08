@@ -14,7 +14,8 @@
     "watch:css": "tailwindcss -i ./src/styles/tailwind.css -o ./public/css/styles.css --watch",
     "build": "npm run build:css && nest build",
     "start": "node dist/main.js",
-    "start:dev": "npm run build:css && nest start --watch"
+    "start:dev": "npm run build:css && nest start --watch",
+    "test": "npm run build && node --test test/"
   },
   "dependencies": {
     "@nestjs/common": "^12.4.0",
