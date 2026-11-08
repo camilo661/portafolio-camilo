@@ -463,6 +463,14 @@ function start(D) {
   const need = (label, hint) => { todo.push({ label, hint }); return ''; };
   const ok = v => (Array.isArray(v) ? v.length > 0 : v !== null && v !== undefined && v !== '');
   const chips = arr => `<div class="chips">${arr.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>`;
+  // Habilidad: texto simple o { name, icon, mono }
+  const skill = t => (typeof t === 'string' ? { name: t } : t);
+  const ico = (it, size) => it.icon
+    ? `<img src="${esc(it.icon)}" alt="" class="${size} shrink-0${it.mono ? ' dark:invert' : ''}" loading="lazy" decoding="async">` : '';
+  const skillChips = arr => `<div class="chips">${arr.map(skill).map(it =>
+    `<span class="chip inline-flex items-center gap-1.5">${ico(it, 'size-4')}${esc(it.name)}</span>`).join('')}</div>`;
+  const skillTiles = arr => `<div class="grid grid-cols-3 gap-2 min-[820px]:grid-cols-6">${arr.map(skill).map(it =>
+    `<div class="flex flex-col items-center gap-2 rounded-2xl border border-white/70 bg-white/50 px-1 pt-3.5 pb-2.5 dark:border-white/10 dark:bg-white/5">${ico(it, 'size-8')}<span class="font-body text-[11.5px] font-medium text-ink-2">${esc(it.name)}</span></div>`).join('')}</div>`;
   const ext = (href, label, cls = 'link') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}<span>↗</span></a>`;
   const stars = n => `<span class="stars" aria-label="${n} de 5">${Array.from({ length: 5 }, (_, i) => `<i class="${i + 1 <= Math.round(n) ? 'on' : ''}"></i>`).join('')}<b>${String(n).replace('.', ',')}</b></span>`;
 
@@ -474,6 +482,7 @@ function start(D) {
         : `<div class="hero-photo is-empty" role="img" aria-label="Espacio para la foto de perfil"><svg viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="24" r="11"/><path d="M12 56c2-11 10-17 20-17s18 6 20 17"/></svg><span>Tu foto aquí</span></div>${need('Foto de perfil', 'vertical o cuadrada, mínimo 800 × 1000 px, buena luz y fondo limpio')}`;
       let h = `<div class="hero"><div class="hero-top">${photo}
         <h3 class="hero-name"><span>${esc(parts.slice(0, 2).join(' '))}</span><em>${esc(parts.slice(2).join(' '))}</em></h3></div>
+        ${o.role ? `<p class="font-body m-0 text-[12px] font-medium tracking-[.14em] text-ac uppercase">${esc(o.role)}</p>` : ''}
         ${d.tagline ? `<p class="hero-tag">${esc(d.tagline)}</p>` : need('Frase titular', '3 a 5 palabras, ej. “Software, diseño y creatividad.”')}
         ${d.intro ? `<p class="lead">${esc(d.intro)}</p>` : need('Presentación corta', '1 o 2 líneas: qué estudias y qué te interesa crear')}`;
       d.stats.filter(s => !ok(s.value)).forEach(s => need(`Cifra: ${s.label}`, s.label === 'Inglés' ? 'nivel, ej. B1' : 'número'));
@@ -489,8 +498,8 @@ function start(D) {
     },
     skills(d) {
       return `<p class="lead">${esc(d.intro)}</p><div class="grid2">${d.groups.map((g, i) => `
-        <div class="card"><div class="card-k">${pad2(i + 1)}</div><h4>${esc(g.name)}</h4>
-          ${g.items.length ? chips(g.items) : `<div class="chips"><span class="chip ghost">por cargar</span></div>${need(g.name, '3 a 5 herramientas')}`}
+        <div class="card${i === 0 ? ' min-[820px]:col-span-2' : ''}"><div class="card-k">${pad2(i + 1)}</div><h4>${esc(g.name)}</h4>
+          ${g.items.length ? (i === 0 ? skillTiles(g.items) : skillChips(g.items)) : `<div class="chips"><span class="chip ghost">por cargar</span></div>${need(g.name, '3 a 5 herramientas')}`}
         </div>`).join('')}</div>`;
     },
     projects(d) {
@@ -565,7 +574,7 @@ function start(D) {
       return h;
     },
     learning(d) {
-      let h = `<h5 class="sub">Idiomas</h5><div class="grid2">${d.languages.map(l => `<div class="card lang"><h4>${esc(l.name)}</h4><b>${ok(l.level) ? esc(l.level) : '—'}</b></div>`).join('')}</div>`;
+      let h = `<h5 class="sub">Idiomas</h5><div class="grid2">${d.languages.map(l => `<div class="card lang"><h4>${esc(l.name)}</h4><b>${ok(l.level) ? esc(l.level) : '—'}</b>${l.detail ? `<p class="text-mute!">${esc(l.detail)}</p>` : ''}</div>`).join('')}</div>`;
       d.languages.filter(l => !ok(l.level)).forEach(l => need(`Nivel de ${l.name}`, 'ej. A2, B1, B2'));
       h += `<h5 class="sub">Comunicación y otras experiencias</h5>`;
       h += d.experiences.length ? `<ol class="tl">${d.experiences.map(e => `<li><div class="tl-k">${esc(e.year)} · ${esc(e.kind)}</div><h4>${esc(e.title)}</h4><p>${esc(e.org)}</p></li>`).join('')}</ol>`
@@ -739,7 +748,7 @@ function start(D) {
     $('#ih').innerHTML = `
       <div class="ih-wrap">
         <div class="ih-text">
-          <p class="ih-eyebrow">Portafolio · ${esc((o.location || '').split(',').slice(0, 2).join(','))}</p>
+          <p class="ih-eyebrow">${esc(o.role || 'Portafolio')} · ${esc((o.location || '').split(',').slice(0, 2).join(','))}</p>
           <h1 class="ih-name"><span>${esc(parts.slice(0, 2).join(' '))}</span><span>${esc(parts.slice(2).join(' '))}</span></h1>
           ${h.tagline ? `<p class="ih-tag">${esc(h.tagline)}</p>` : ''}
           ${h.intro ? `<p class="ih-lead">${esc(h.intro)}</p>` : ''}
