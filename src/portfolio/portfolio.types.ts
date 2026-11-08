@@ -17,7 +17,14 @@ export interface Owner {
   avatar: Maybe<string>;
 }
 
-export interface Link { label: string; href: string; primary?: boolean }
+export type LinkKind = 'demo' | 'github' | 'download';
+export interface Link {
+  label: string;
+  href: string;
+  primary?: boolean;
+  /** Tipo de enlace: define el ícono del botón */
+  kind?: LinkKind;
+}
 export interface Image { src: string; alt: string }
 
 export interface HeroData {
@@ -47,7 +54,14 @@ export interface Project {
   images: Image[];
   links: Link[];
 }
-export interface ProjectsData { intro: Maybe<string>; githubAll: Maybe<string>; emptySlots: number; items: Project[] }
+export interface ProjectsData {
+  intro: Maybe<string>;
+  githubAll: Maybe<string>;
+  /** Proyectos principales: galería de capturas (o espacio reservado si aún no hay) */
+  items: Project[];
+  /** Otros proyectos públicos: tarjeta compacta; imagen solo si están desplegados */
+  others: Project[];
+}
 export interface TimelineData {
   intro: string;
   items: { period: string; kind: string; title: string; org: string; place?: string; link?: string }[];
