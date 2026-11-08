@@ -394,7 +394,6 @@
   .todo strong { font: 500 13.5px var(--f-disp); color: var(--ink); }
   .todo li span { font: 400 12px/1.5 var(--f-body); color: var(--mute); }
 
-  .dock { display: none; }
   @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
 
   /* ───────── Móvil ───────── */
@@ -408,12 +407,6 @@
     .btn-theme { width: 38px; height: 38px; }
     .bg-word { font-size: 46vw; }
 
-    .dock {
-      display: flex; gap: 8px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
-      padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
-      overflow-x: auto; scrollbar-width: none;
-    }
-    .dock::-webkit-scrollbar { display: none; }
     .dock button {
       flex: none; display: inline-flex; align-items: center; gap: 8px; padding: 10px 15px; border-radius: 999px;
       background: var(--glass); border: 1px solid var(--glass-b); backdrop-filter: blur(12px);
@@ -421,8 +414,6 @@
     }
     .dock button span { font: 500 10.5px var(--f-body); color: var(--mute); }
     .dock button.on { background: #fff; }
-    body.is-focus .dock { opacity: 0; pointer-events: none; }
-    .dock { transition: opacity .4s; }
 
     .panel { top: auto; left: 8px; right: 8px; bottom: 8px; width: auto; height: 63vh; height: 63dvh; border-radius: 26px; transform: translateY(calc(100% + 30px)); }
     .pn-scroll { padding: 20px 18px 30px; }
@@ -569,7 +560,6 @@
     .ih-tag { font-size: 22px; }
     .ih-lead { font-size: 14.5px; line-height: 1.6; }
     .ih-text .btn-solid { padding: 11px 18px; }
-    body.is-assembled .dock { opacity: 0; pointer-events: none; }
   }
 
   /* Canto de aluminio del teléfono ensamblado */
