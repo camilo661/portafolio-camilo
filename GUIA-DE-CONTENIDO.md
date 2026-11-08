@@ -13,8 +13,10 @@ Todo lo que hay que reunir para llenar el portafolio. Sigue la misma estructura 
 - Fotos: **cuerpo completo** (portada), **estilo hoja de vida** (panel de Inicio) y **avatar** (cabecera)
 - Presentación: **Estudiante de Ingeniería de Software y técnico en telefonía móvil, con más de 7 años de experiencia en microsoldadura y software.**
 - Proyecto **Turbo Ratas** (texto, tecnologías, 5 capturas, demo y repositorio)
-- Proyectos principales: **Conclave** (2 capturas, descarga para macOS y GitHub), **TuControl** y **Traduya** (descarga del APK y GitHub)
-- **18 proyectos públicos** más, en formato compacto con botón de GitHub (y demo con captura cuando están publicados)
+- Proyectos principales: **Conclave** (2 capturas, descarga para macOS y GitHub), **TuControl** (GitHub) y **Traduya** (descarga del APK y GitHub)
+- Frase de proyectos: **Ideas que empezaron como una pregunta y terminaron funcionando…**
+- Sobre mí: frase, dos párrafos y tres áreas de enfoque (redactados a partir de tu perfil; revísalos)
+- **22 proyectos públicos** más, en formato compacto con botón de GitHub (y demo con captura cuando están publicados)
 - Rol: **Desarrollador Full Stack**
 - Idiomas: **Español** (nativo) · **Inglés** (intermedio, nivel 5)
 - Cifras de Inicio: **6 lenguajes** · **Inglés nivel 5**
@@ -37,10 +39,7 @@ Hoja de vida:                        (adjuntar) PDF
 
 ## 02 · Sobre mí (Chip A19 Pro)
 ```
-Frase corta:            ej. "Más que código, ideas que conectan."
-Párrafo 1:              tu formación: carrera, semestre, universidad y qué te interesa del ciclo de un producto
-Párrafo 2:              en qué programas y qué has construido (apps, APIs, videojuegos, etc.)
-3 áreas de enfoque:     ej. Desarrollo de software · Arquitectura y patrones · IA aplicada
+Ya cargado. Solo falta, si quieres, el nombre de tu universidad y el semestre en el párrafo 1.
 ```
 
 ## 03 · Habilidades técnicas (RAM 12 GB)
@@ -55,9 +54,8 @@ IA y asistentes:
 ```
 
 ## 04 · Proyectos (Almacenamiento NAND)
-Ya está Turbo Ratas. Hay 2 ranuras libres y se pueden agregar más.
+Ya están los proyectos principales, la frase y los demás públicos. Faltan capturas de TuControl y Traduya.
 ```
-Frase introductoria de proyectos:
 Enlace a todos tus repositorios:     ej. https://github.com/usuario?tab=repositories
 
 — Proyecto (repetir por cada uno) —
