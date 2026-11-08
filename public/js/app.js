@@ -465,6 +465,27 @@ function start(D) {
   const chips = arr => `<div class="chips">${arr.map(t => `<span class="chip">${esc(t)}</span>`).join('')}</div>`;
   // Habilidad: texto simple o { name, icon, mono }
   const skill = t => (typeof t === 'string' ? { name: t } : t);
+  // Proyectos: galería, espacio para capturas y botones pequeños (descargar, GitHub, demo)
+  const ICON = {
+    download: '<path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5M5 19h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+    github: '<path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.6 9.6 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/>',
+    demo: '<path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>',
+  };
+  const pbtn = l => {
+    const local = !/^https?:/.test(l.href);
+    const tone = l.primary
+      ? 'bg-teal text-white shadow-[0_8px_18px_-10px_rgba(45,114,125,.9)] hover:brightness-110 dark:bg-[#3a98a3]'
+      : 'border border-glass-b bg-glass text-ink hover:bg-glass-2';
+    return `<a href="${esc(l.href)}"${local && l.kind === 'download' ? ' download' : ' target="_blank" rel="noopener"'} class="font-disp inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12.5px] font-medium no-underline transition ${tone}">${l.kind ? `<svg viewBox="0 0 24 24" class="size-3.5" aria-hidden="true">${ICON[l.kind]}</svg>` : ''}${esc(l.label)}</a>`;
+  };
+  const gallery = p => `<div class="proj-media">
+            <div class="proj-main"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}" data-main></div>
+            ${p.images.length > 1 ? `<div class="proj-thumbs">${p.images.map((im, j) => `<button class="${j ? '' : 'on'}" data-img="${j}" aria-label="Ver captura ${j + 1}"><img src="${esc(im.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
+          </div>`;
+  const shotsSoon = p => `<div class="proj-main grid! place-content-center justify-items-center gap-2 border-b border-dashed border-line-2 bg-white/25! text-mute dark:bg-white/5!" role="img" aria-label="Espacio para las capturas de ${esc(p.title)}">
+            <svg viewBox="0 0 24 24" class="size-8 opacity-60" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 6l1.5-2.5h3L15 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span class="font-body text-[11.5px] font-medium tracking-[.08em] uppercase">Capturas próximamente</span>
+          </div>`;
   const ico = (it, size) => it.icon
     ? `<img src="${esc(it.icon)}" alt="" class="${size} shrink-0${it.mono ? ' dark:invert' : ''}" loading="lazy" decoding="async">` : '';
   const skillChips = arr => `<div class="chips">${arr.map(skill).map(it =>
@@ -504,22 +525,30 @@ function start(D) {
     },
     projects(d) {
       let h = d.intro ? `<p class="lead">${esc(d.intro)}</p>` : need('Introducción de proyectos', '1 línea');
-      h += d.items.map((p, i) => `<article class="proj">
-          <div class="proj-media">
-            <div class="proj-main"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}" data-main></div>
-            <div class="proj-thumbs">${p.images.map((im, j) => `<button class="${j ? '' : 'on'}" data-img="${j}" aria-label="Ver captura ${j + 1}"><img src="${esc(im.src)}" alt="" loading="lazy"></button>`).join('')}</div>
-          </div>
+      h += d.items.map((p, i) => {
+        if (!p.images.length) need(`Capturas de ${p.title}`, '1 a 5 imágenes horizontales, ideal 1350 × 600 px');
+        if (!p.links.length) need(`Enlaces de ${p.title}`, 'el repositorio es privado: hazlo público o publica una versión para descargar');
+        return `<article class="proj">
+          ${p.images.length ? gallery(p) : shotsSoon(p)}
           <div class="proj-body">
             <div class="card-k">${pad2(i + 1)} · ${esc(p.kicker)}</div>
             <h4>${esc(p.title)}</h4>
             <p>${esc(p.description)}</p>
             ${chips(p.tech)}
-            <div class="actions">${p.links.map(l => ext(l.href, l.label, l.primary ? 'btn-solid' : 'btn-glass')).join('')}</div>
+            ${p.links.length ? `<div class="flex flex-wrap gap-2">${p.links.map(pbtn).join('')}</div>` : ''}
           </div>
-        </article>`).join('');
-      if (d.emptySlots) {
-        h += `<div class="grid2">${Array.from({ length: d.emptySlots }, (_, i) => `<div class="slot"><span>${pad2(d.items.length + i + 1)}</span>Ranura disponible<i>+</i></div>`).join('')}</div>`;
-        for (let i = 0; i < d.emptySlots; i++) need(`Proyecto ${pad2(d.items.length + i + 1)}`, 'nombre, categoría, descripción, tecnologías, demo, repositorio, capturas');
+        </article>`;
+      }).join('');
+      if (d.others.length) {
+        h += `<h5 class="sub">Otros proyectos</h5><div class="grid2">${d.others.map(p => `
+          <article class="card gap-2.5!">
+            ${p.images.length ? `<img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}" loading="lazy" decoding="async" class="mb-1 block aspect-[1350/600] w-full rounded-xl object-cover object-top">` : ''}
+            <div class="card-k">${esc(p.kicker)}</div>
+            <h4>${esc(p.title)}</h4>
+            <p>${esc(p.description)}</p>
+            <div class="flex flex-wrap gap-1">${p.tech.map(t => `<span class="font-body rounded-full border border-line px-2 py-0.5 text-[11px] text-mute">${esc(t)}</span>`).join('')}</div>
+            <div class="mt-auto flex flex-wrap gap-1.5 pt-1">${p.links.map(pbtn).join('')}</div>
+          </article>`).join('')}</div>`;
       }
       h += d.githubAll ? ext(d.githubAll, 'Ver todos los proyectos en GitHub') : need('Enlace a todos tus repositorios', 'github.com/usuario?tab=repositories');
       return h;
