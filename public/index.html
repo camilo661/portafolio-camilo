@@ -36,12 +36,12 @@
   <div class="labels" id="labels"></div>
   <div class="reticle" id="reticle" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="reticle-tag"></span></div>
 
-  <header class="top">
-    <a class="brand" href="#" data-home>
+  <header class="top pointer-events-none fixed inset-x-0 top-0 z-20 flex items-center justify-between px-7 py-[22px] *:pointer-events-auto max-[820px]:gap-[10px] max-[820px]:bg-[linear-gradient(180deg,rgba(181,197,204,.92)_50%,transparent)] max-[820px]:px-4 max-[820px]:py-[14px] dark:max-[820px]:bg-[linear-gradient(180deg,rgba(22,31,37,.94)_50%,transparent)]">
+    <a class="flex items-center gap-[13px] no-underline max-[820px]:min-w-0 max-[820px]:gap-[10px]" href="#" data-home>
       <span class="brand-mark">CC</span>
-      <span class="brand-txt"><strong>Camilo Andrés Castro Acosta</strong><em>Portafolio · Pasto, Nariño</em></span>
+      <span class="flex flex-col gap-[3px] max-[820px]:min-w-0"><strong class="font-disp text-[15px] font-medium text-ink max-[820px]:overflow-hidden max-[820px]:text-[13px] max-[820px]:text-ellipsis max-[820px]:whitespace-nowrap">Camilo Andrés Castro Acosta</strong><em class="font-body text-[12px] font-normal not-italic text-mute max-[820px]:text-[11px] max-[820px]:whitespace-nowrap">Portafolio · Pasto, Nariño</em></span>
     </a>
-    <nav class="top-actions">
+    <nav class="flex items-center gap-[10px] [transition:transform_1.05s_var(--ease)] max-[820px]:gap-2 min-[820px]:in-[.is-focus]:[transform:translateX(calc(-1*min(620px,46vw)-8px))] min-[820px]:in-[.is-focus]:delay-[.35s]">
       <div class="meter" id="meter"></div>
       <button class="btn-glass" id="btnAssemble">Ensamblar</button>
       <button class="btn-solid" id="btnTour">Recorrido <span>→</span></button>
