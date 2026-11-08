@@ -85,7 +85,7 @@ export const PORTFOLIO: Portfolio = {
       eyebrow: 'Trabajo seleccionado', title: 'Proyectos destacados',
       data: {
         intro: null,          // 1 línea sobre qué reflejan tus proyectos
-        githubAll: null,      // ej. 'https://github.com/camilo661?tab=repositories'
+        githubAll: 'https://github.com/camilo661?tab=repositories',
         emptySlots: 2,
         items: [
           {
@@ -177,7 +177,7 @@ export const PORTFOLIO: Portfolio = {
         text: null,           // 1 línea: sobre qué estás abierto a conversar
         email: null,
         linkedin: null,
-        github: null,         // ej. 'https://github.com/camilo661'
+        github: 'https://github.com/camilo661',
         instagram: null,
       },
     },
