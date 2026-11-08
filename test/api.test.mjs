@@ -35,11 +35,21 @@ test('GET /api/portfolio devuelve el propietario y las 10 secciones', async () =
   );
 });
 
-test('GET /api/portfolio/sections/proyectos incluye Turbo Ratas', async () => {
+test('GET /api/portfolio/sections/proyectos: proyectos principales y otros proyectos', async () => {
   const res = await fetch(`${BASE}/api/portfolio/sections/proyectos`);
   assert.equal(res.status, 200);
-  const section = await res.json();
-  assert.equal(section.data.items[0].title, 'Turbo Ratas');
+  const { data } = await res.json();
+  assert.deepEqual(data.items.map((p) => p.title), ['Conclave', 'TuControl', 'Traduya', 'Turbo Ratas']);
+  assert.ok(data.others.length > 0);
+  // Los otros proyectos solo llevan imagen si tienen demo publicada
+  for (const p of data.others) {
+    if (p.images.length) assert.ok(p.links.some((l) => l.kind === 'demo'), `${p.title} tiene imagen sin demo`);
+  }
+});
+
+test('el instalador de Conclave se puede descargar', async () => {
+  const res = await fetch(`${BASE}/downloads/Conclave-1.0.0.dmg`, { method: 'HEAD' });
+  assert.equal(res.status, 200);
 });
 
 test('una sección inexistente responde 404', async () => {
