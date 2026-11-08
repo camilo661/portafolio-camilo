@@ -32,7 +32,7 @@ export const PORTFOLIO: Portfolio = {
         photoFull: 'assets/camilo/camilo-completa.jpg',
         stats: [              // cifras destacadas
           { value: '5.º', label: 'Semestre' },
-          { value: '6', label: 'Lenguajes' },
+          { value: '6', label: 'Lenguajes de programación' },
           { value: 'Nivel 5', label: 'Inglés' },
         ],
       },
