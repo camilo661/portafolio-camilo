@@ -16,6 +16,7 @@ src/
 │   ├── portfolio.service.ts
 │   ├── portfolio.controller.ts  # GET /api/portfolio
 │   └── portfolio.module.ts
+├── health/                      # GET /api/health
 └── styles/
     └── tailwind.css             # Tailwind: tokens del diseño, tema claro/oscuro y componentes
 public/
@@ -23,6 +24,8 @@ public/
 ├── js/app.js                    # Escena 3D, zoom por pieza, reloj, tema, navegación
 ├── css/styles.css               # Generado por Tailwind (no se edita a mano)
 └── assets/                      # Imágenes, foto de perfil, CV
+test/
+└── api.test.mjs                 # Pruebas de extremo a extremo
 ```
 
 ## Comandos
@@ -33,6 +36,7 @@ npm run start:dev    # desarrollo: compila Tailwind y levanta NestJS con recarga
 npm run watch:css    # (en otra terminal) recompila Tailwind al guardar
 npm run build        # compilación de producción (Tailwind + NestJS)
 npm start            # servidor de producción → http://localhost:3000
+npm test             # compila y ejecuta las pruebas de la API (node:test)
 ```
 
 ## API
@@ -40,6 +44,7 @@ npm start            # servidor de producción → http://localhost:3000
 | Método | Ruta | Respuesta |
 |---|---|---|
 | GET | `/api/portfolio` | Portafolio completo: propietario + 10 secciones |
+| GET | `/api/health` | Estado del servidor (`status`, `uptime`, `timestamp`) |
 | GET | `/api/portfolio/sections/:key` | Una sección (`inicio`, `sobre-mi`, `habilidades`, `proyectos`, `formacion`, `experiencia`, `testimonios`, `mas-de-mi`, `certificados`, `contacto`) |
 
 ## Agregar contenido
