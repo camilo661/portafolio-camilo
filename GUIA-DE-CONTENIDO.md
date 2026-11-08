@@ -13,7 +13,7 @@ Todo lo que hay que reunir para llenar el portafolio. Sigue la misma estructura 
 - Fotos: **cuerpo completo** (portada), **estilo hoja de vida** (panel de Inicio) y **avatar** (cabecera)
 - Presentación: **Estudiante de Ingeniería de Software y técnico en telefonía móvil, con más de 7 años de experiencia en microsoldadura y software.**
 - Proyecto **Turbo Ratas** (texto, tecnologías, 5 capturas, demo y repositorio)
-- Proyectos principales: **Conclave** (2 capturas, descarga para macOS y GitHub), **TuControl** (GitHub) y **Traduya** (descarga del APK y GitHub)
+- Proyectos principales: **Conclave** (2 capturas, descarga para macOS y GitHub), **TuControl** (5 capturas del reloj y GitHub) y **Traduya** (descarga del APK y GitHub)
 - Frase de proyectos: **Ideas que empezaron como una pregunta y terminaron funcionando…**
 - Sobre mí: frase, dos párrafos y tres áreas de enfoque (redactados a partir de tu perfil; revísalos)
 - **22 proyectos públicos** más, en formato compacto con botón de GitHub (y demo con captura cuando están publicados)
@@ -55,7 +55,7 @@ Bases de datos:
 ```
 
 ## 04 · Proyectos (Almacenamiento NAND)
-Ya están los proyectos principales, la frase y los demás públicos. Faltan capturas de TuControl y Traduya.
+Ya están los proyectos principales, la frase y los demás públicos. Faltan capturas de Traduya.
 ```
 Enlace a todos tus repositorios:     ej. https://github.com/usuario?tab=repositories
 
