@@ -5,3 +5,4 @@ public/css/styles.css
 .DS_Store
 .vercel
 *.log
+*.tsbuildinfo
