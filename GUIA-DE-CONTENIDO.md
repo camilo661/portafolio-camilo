@@ -13,7 +13,11 @@ Todo lo que hay que reunir para llenar el portafolio. Sigue la misma estructura 
 - Fotos: **cuerpo completo** (portada), **estilo hoja de vida** (panel de Inicio) y **avatar** (cabecera)
 - Presentación: **Estudiante de Ingeniería de Software y técnico en telefonía móvil, con más de 7 años de experiencia en microsoldadura y software.**
 - Proyecto **Turbo Ratas** (texto, tecnologías, 5 capturas, demo y repositorio)
-- Idioma: Español (nativo)
+- Rol: **Desarrollador Full Stack**
+- Idiomas: **Español** (nativo) · **Inglés** (intermedio, nivel 5)
+- Cifras de Inicio: **6 lenguajes** · **Inglés nivel 5**
+- Habilidades con íconos: **Java, Kotlin, JavaScript, TypeScript, Python, Swift** · HTML5, CSS3, Tailwind CSS · Node.js, NestJS · Git, GitHub, Docker
+- GitHub: **github.com/camilo661** (contacto y enlace a todos los repositorios)
 
 ---
 
