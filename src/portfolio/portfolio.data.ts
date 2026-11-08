@@ -77,7 +77,16 @@ export const PORTFOLIO: Portfolio = {
             items: [{ name: 'Git', icon: 'assets/icons/git.svg' }, { name: 'GitHub', icon: 'assets/icons/github.svg', mono: true }, { name: 'Docker', icon: 'assets/icons/docker.svg' }],
           },
           { name: 'Bases de datos', items: [] },
-          { name: 'IA y asistentes', items: [] },
+          {
+            name: 'IA y asistentes',
+            items: [
+              { name: 'Claude', icon: 'assets/icons/claude.svg' },
+              { name: 'ChatGPT', icon: 'assets/icons/chatgpt.svg', mono: true },
+              { name: 'Gemini', icon: 'assets/icons/gemini.svg' },
+              { name: 'GitHub Copilot', icon: 'assets/icons/githubcopilot.svg', mono: true },
+              { name: 'Perplexity', icon: 'assets/icons/perplexity.svg' },
+            ],
+          },
         ],
       },
     },
