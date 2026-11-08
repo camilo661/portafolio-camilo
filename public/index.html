@@ -60,18 +60,18 @@
   <nav class="dock" id="dock" aria-label="Componentes"></nav>
 
   <aside class="panel" id="panel" aria-hidden="true" aria-labelledby="pnTitle">
-    <header class="pn-head">
-      <span class="pn-code" id="pnCode"></span>
+    <header class="flex flex-none items-center justify-between gap-3 border-b border-line px-[26px] py-5 max-[820px]:px-[18px] max-[820px]:py-[14px]">
+      <span class="font-body text-[11.5px] font-medium tracking-[.1em] text-ac uppercase" id="pnCode"></span>
       <button class="pn-close" id="pnClose" aria-label="Cerrar y volver al teléfono">✕</button>
     </header>
     <div class="pn-scroll" id="pnScroll">
-      <p class="pn-eyebrow" id="pnEyebrow"></p>
+      <p class="font-body mt-0 mb-[10px] text-[12px] font-medium tracking-[.1em] text-ac uppercase" id="pnEyebrow"></p>
       <h2 class="pn-title" id="pnTitle"></h2>
-      <div class="pn-body" id="pnBody"></div>
+      <div class="flex flex-col gap-5" id="pnBody"></div>
     </div>
-    <footer class="pn-nav">
+    <footer class="flex flex-none items-center justify-between border-t border-line px-4 py-3">
       <button class="pn-step" id="pnPrev"><span>←</span><em></em></button>
-      <span class="pn-count" id="pnCount"></span>
+      <span class="font-body text-[12px] font-medium tracking-[.06em] text-mute" id="pnCount"></span>
       <button class="pn-step" id="pnNext"><em></em><span>→</span></button>
     </footer>
   </aside>
