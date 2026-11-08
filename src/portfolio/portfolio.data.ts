@@ -43,9 +43,12 @@ export const PORTFOLIO: Portfolio = {
       hs: 'cpu', part: 'Procesador', key: 'sobre-mi', type: 'about', accent: 'teal',
       eyebrow: 'Sobre mí', title: 'Más que código',
       data: {
-        headline: null,       // frase corta, ej. 'Más que código, ideas que conectan.'
-        paragraphs: [],       // 2 párrafos: formación + qué programas / qué has construido
-        focus: [],            // 3 áreas, ej. ['Desarrollo de software', 'Arquitectura', 'IA aplicada']
+        headline: 'Del cautín al código: entiendo la tecnología por dentro y por fuera.',
+        paragraphs: [
+          'Soy estudiante de Ingeniería de Software en Pasto, Nariño, y técnico en telefonía móvil. Durante más de siete años he reparado teléfonos a nivel de placa con microsoldadura, y ese trabajo me enseñó a diagnosticar con paciencia y a no dejar un detalle sin revisar.',
+          'Hoy llevo esa misma precisión al software. Construyo aplicaciones para macOS, Android y Wear OS, sistemas web con Java, Spring Boot, NestJS y React, y proyectos que usan inteligencia artificial para resolver problemas reales: traducir una llamada, controlar el televisor con la voz o navegar sin tocar el teclado.',
+        ],
+        focus: ['Desarrollo Full Stack', 'Apps móviles con IA', 'Patrones de diseño'],
       },
     },
 
