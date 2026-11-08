@@ -174,7 +174,7 @@
     position: absolute; left: 18px; right: 18px; bottom: 86px; padding: 12px 14px; border-radius: 22px;
     display: flex; align-items: center; gap: 11px;
     background: rgba(255, 255, 255, .22); border: 1px solid rgba(255, 255, 255, .35);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
   .dsp-mono { flex: none; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 50%; background: rgba(255, 255, 255, .85); color: #15222a; font: 500 12px var(--f-disp); }
   .dsp-wtxt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
@@ -199,7 +199,7 @@
     display: flex; align-items: flex-start; gap: 10px;
     padding: 10px 12px; border-radius: 16px; text-align: left;
     background: var(--glass); border: 1px solid var(--glass-b);
-    backdrop-filter: blur(14px) saturate(1.2); -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
     box-shadow: 0 10px 30px -18px rgba(21, 34, 42, .5);
     pointer-events: auto;
     transition: background .3s, opacity .6s, box-shadow .3s;
@@ -240,7 +240,7 @@
   }
   .btn-solid { padding: 12px 22px; background: var(--teal); color: #fff; border: 0; box-shadow: 0 12px 24px -12px rgba(45, 114, 125, .9); }
   .btn-solid:hover { background: var(--teal-d); transform: translateY(-1px); }
-  .btn-glass { padding: 11px 20px; background: var(--glass); color: var(--ink); border: 1px solid var(--glass-b); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .btn-glass { padding: 11px 20px; background: var(--glass); color: var(--ink); border: 1px solid var(--glass-b); backdrop-filter: blur(12px); }
   .btn-glass:hover { background: rgba(255, 255, 255, .6); }
   .btn-solid span, .btn-glass span, .link span { font-family: var(--f-body); font-size: 12px; opacity: .8; }
   .link { padding: 2px 0; color: var(--teal-d); font-size: 13px; }
@@ -262,7 +262,7 @@
   .btn-theme {
     flex: none; width: 44px; height: 44px; display: grid; place-items: center; padding: 0; border-radius: 50%;
     background: var(--glass); border: 1px solid var(--glass-b); color: var(--ink);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
     transition: background .3s, transform .35s var(--ease-out);
   }
   .btn-theme:hover { background: var(--glass-2); transform: rotate(-12deg); }
@@ -304,7 +304,7 @@
     width: min(620px, 46vw);
     display: flex; flex-direction: column;
     background: var(--panel); border: 1px solid var(--glass-b); border-radius: 30px;
-    backdrop-filter: blur(30px) saturate(1.3); -webkit-backdrop-filter: blur(30px) saturate(1.3);
+    backdrop-filter: blur(30px) saturate(1.3);
     box-shadow: 0 40px 80px -40px rgba(21, 34, 42, .55);
     overflow: hidden;
     transform: translateX(calc(100% + 40px));
@@ -585,7 +585,7 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
     background: radial-gradient(80% 60% at 50% 30%, rgba(255, 255, 255, .55), transparent 70%), rgba(255, 255, 255, .2);
     border: 1.5px dashed var(--line-2); box-shadow: none; color: var(--mute);
-    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
   }
   .ih-ph svg { width: 40%; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; opacity: .7; }
   .ih-ph span { font: 500 11.5px var(--f-body); letter-spacing: .08em; text-transform: uppercase; }
