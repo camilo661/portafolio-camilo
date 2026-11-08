@@ -55,3 +55,9 @@ test('sirve el frontend y los estilos de Tailwind', async () => {
   assert.equal(css.status, 200);
   assert.match(css.headers.get('content-type'), /text\/css/);
 });
+
+test('la animación del teléfono no choca con la animación spin de Tailwind', async () => {
+  const css = await (await fetch(`${BASE}/css/styles.css`)).text();
+  assert.match(css, /@keyframes phone-spin\{to\{--spin:360deg\}\}/);
+  assert.match(css, /\.rig\.spin\{[^}]*phone-spin/);
+});
