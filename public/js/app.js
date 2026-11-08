@@ -478,10 +478,19 @@ function start(D) {
       : 'border border-glass-b bg-glass text-ink hover:bg-glass-2';
     return `<a href="${esc(l.href)}"${local && l.kind === 'download' ? ' download' : ' target="_blank" rel="noopener"'} class="font-disp inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12.5px] font-medium no-underline transition ${tone}">${l.kind ? `<svg viewBox="0 0 24 24" class="size-3.5" aria-hidden="true">${ICON[l.kind]}</svg>` : ''}${esc(l.label)}</a>`;
   };
-  const gallery = p => `<div class="proj-media">
-            <div class="proj-main"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}" data-main></div>
-            ${p.images.length > 1 ? `<div class="proj-thumbs">${p.images.map((im, j) => `<button class="${j ? '' : 'on'}" data-img="${j}" aria-label="Ver captura ${j + 1}"><img src="${esc(im.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
+  // Reloj redondo: la captura cuadrada se recorta como esfera con bisel
+  const WATCH = {
+    main: 'relative bg-[radial-gradient(circle_at_50%_45%,#1d2733,#101521_70%)]!',
+    face: 'absolute inset-0 m-auto h-[80%]! w-auto! aspect-square rounded-full ring-[6px] ring-[#2a3440] shadow-[0_0_0_9px_#11161d,0_18px_40px_-12px_rgba(0,0,0,.8)]',
+    thumb: 'aspect-square! rounded-full! w-[72%] justify-self-center',
+  };
+  const gallery = p => {
+    const w = p.frame === 'watch';
+    return `<div class="proj-media">
+            <div class="proj-main ${w ? WATCH.main : ''}"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}" class="${w ? WATCH.face : ''}" data-main></div>
+            ${p.images.length > 1 ? `<div class="proj-thumbs">${p.images.map((im, j) => `<button class="${j ? '' : 'on'} ${w ? WATCH.thumb : ''}" data-img="${j}" aria-label="Ver captura ${j + 1}"><img src="${esc(im.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
           </div>`;
+  };
   const shotsSoon = p => `<div class="proj-main grid! place-content-center justify-items-center gap-2 border-b border-dashed border-line-2 bg-white/25! text-mute dark:bg-white/5!" role="img" aria-label="Espacio para las capturas de ${esc(p.title)}">
             <svg viewBox="0 0 24 24" class="size-8 opacity-60" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 6l1.5-2.5h3L15 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
             <span class="font-body text-[11.5px] font-medium tracking-[.08em] uppercase">Capturas próximamente</span>
