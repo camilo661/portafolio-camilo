@@ -87,7 +87,7 @@ export const PORTFOLIO: Portfolio = {
       hs: 'nand', part: 'Memoria', key: 'proyectos', type: 'projects', accent: 'sand',
       eyebrow: 'Trabajo seleccionado', title: 'Proyectos destacados',
       data: {
-        intro: null,          // 1 línea sobre qué reflejan tus proyectos
+        intro: 'Ideas que empezaron como una pregunta y terminaron funcionando: apps con inteligencia artificial, sistemas web y patrones de diseño puestos en práctica.',
         githubAll: 'https://github.com/camilo661?tab=repositories',
         items: [
           {
