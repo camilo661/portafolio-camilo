@@ -498,8 +498,8 @@
   /* ==========================================================================
      PORTADA — teléfono girando a la izquierda, presentación a la derecha
      ========================================================================== */
-  .rig.spin { transition: none; animation: spin 22s linear infinite; }
-  @keyframes spin { to { --spin: 360deg; } }
+  .rig.spin { transition: none; animation: phone-spin 12s linear infinite; }
+  @keyframes phone-spin { to { --spin: 360deg; } }
 
   .layer[data-layer="back"] { transform-style: preserve-3d; }
   .face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
