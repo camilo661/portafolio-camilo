@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'node:path';
+import { HealthModule } from './health/health.module.js';
 import { PortfolioModule } from './portfolio/portfolio.module.js';
 
 @Module({
@@ -11,6 +12,7 @@ import { PortfolioModule } from './portfolio/portfolio.module.js';
       exclude: ['/api/{*rest}'],
     }),
     PortfolioModule,
+    HealthModule,
   ],
 })
 export class AppModule {}
