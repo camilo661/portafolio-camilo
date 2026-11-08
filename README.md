@@ -2,7 +2,11 @@
 
 Portafolio personal presentado como un **iPhone 17 Pro Max desensamblado**: cada pieza del teléfono (pantalla, procesador, RAM, memoria, batería, cámaras…) abre una sección distinta del perfil.
 
+**Sitio en línea:** https://portafolio-camilo-nest.vercel.app
+
 **Stack:** HTML · Tailwind CSS v4 · NestJS 12 (TypeScript)
+
+Cada cambio que se sube a `main` se publica automáticamente en Vercel.
 
 ## Estructura
 
