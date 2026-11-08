@@ -1,7 +1,18 @@
-(() => {
-  'use strict';
+/* ==========================================================================
+   CC-17 PRO MAX — interacción del portafolio
+   El contenido llega desde la API de NestJS: GET /api/portfolio
+   ========================================================================== */
+'use strict';
 
-  const D = window.PORTFOLIO;
+fetch('/api/portfolio')
+  .then(r => { if (!r.ok) throw new Error(`API ${r.status}`); return r.json(); })
+  .then(start)
+  .catch(err => {
+    console.error('No se pudo cargar el portafolio:', err);
+    document.querySelector('.loader-txt span').textContent = 'No se pudo cargar el contenido';
+  });
+
+function start(D) {
   const W = 280, H = 590, R = 46;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -790,4 +801,4 @@
     tick();
   }
   (document.fonts ? document.fonts.ready : Promise.resolve()).then(intro);
-})();
+}
