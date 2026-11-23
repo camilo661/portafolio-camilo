@@ -531,7 +531,7 @@ function start(D) {
         : `<b>${ok(s.value) ? esc(s.value) : '—'}</b>`);
       h += `<div class="stats">${d.stats.map(s => `<div>${statVal(s)}<span>${esc(s.label)}</span></div>`).join('')}</div>`;
       h += `<div class="meta-row"><span class="pin"></span>${esc(o.location)}</div>`;
-      h += `<div class="actions"><button class="btn-solid" data-next>Conoce mi trabajo <span>→</span></button>${d.cv ? ext(d.cv, 'Ver CV', 'btn-glass') : need('Hoja de vida', 'archivo PDF')}</div></div>`;
+      h += `<div class="actions"><button class="btn-solid" data-next>Conoce mi trabajo <span>→</span></button>${d.cv ? `<a class="btn-glass" href="${esc(d.cv)}" download="Hoja_de_Vida_Camilo_Castro.pdf">Descargar CV <span>↓</span></a>` : need('Hoja de vida', 'archivo PDF')}</div></div>`;
       return h;
     },
     about(d) {
@@ -641,7 +641,11 @@ function start(D) {
       if (d.experiences) h += d.experiences.length ? `<ol class="tl">${d.experiences.map(e => `<li><div class="tl-k">${esc(e.year)} · ${esc(e.kind)}</div><h4>${esc(e.title)}</h4><p>${esc(e.org)}</p></li>`).join('')}</ol>`
         : `<p class="muted">Por cargar</p>${need('Otras experiencias', 'monitorías, audiovisual, moderación, voluntariado: año, título, entidad, tipo')}`;
       h += `<h5 class="sub">Certificados adicionales</h5>`;
-      h += d.certificates.length ? `<ol class="tl">${d.certificates.map(c => `<li><div class="tl-k">${esc(c.year)}</div><h4>${esc(c.title)}</h4><p>${esc(c.org)}</p>${c.link ? ext(c.link, 'Ver certificado') : ''}</li>`).join('')}</ol>`
+      const certCards = hide => d.certificates.map(c => `<a class="reel-card" href="${esc(c.image)}" target="_blank" rel="noopener"${hide ? ' aria-hidden="true" tabindex="-1"' : ''}>
+          <img src="${esc(c.image)}" alt="${hide ? '' : `Certificado: ${esc(c.title)}`}" loading="lazy" decoding="async">
+          <span class="reel-cap"><strong>${esc(c.title)}</strong><em>${esc(c.org)} · ${esc(c.year)}</em></span></a>`).join('');
+      h += d.certificates.length && d.certificates.every(c => c.image) ? `<div class="reel"><div class="reel-track">${certCards(false)}${certCards(true)}</div></div>`
+        : d.certificates.length ? `<ol class="tl">${d.certificates.map(c => `<li><div class="tl-k">${esc(c.year)}</div><h4>${esc(c.title)}</h4><p>${esc(c.org)}</p>${c.link ? ext(c.link, 'Ver certificado') : ''}</li>`).join('')}</ol>`
         : `<p class="muted">Por cargar</p>${need('Certificados adicionales', 'año, nombre, entidad, archivo (imagen o PDF)')}`;
       return h;
     },

@@ -96,7 +96,8 @@ export interface LearningData {
   languages: { name: string; level: Maybe<string>; detail?: string }[];
   /** Opcional: si no existe, el bloque no se muestra */
   experiences?: { year: string; title: string; org: string; kind: string }[];
-  certificates: { year: string; title: string; org: string; link?: string }[];
+  /** Con `image`, los certificados se muestran en un carrusel */
+  certificates: { year: string; title: string; org: string; link?: string; image?: string }[];
 }
 export interface ContactData {
   text: Maybe<string>;

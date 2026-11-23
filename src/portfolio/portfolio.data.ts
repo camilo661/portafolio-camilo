@@ -27,7 +27,7 @@ export const PORTFOLIO: Portfolio = {
       data: {
         tagline: 'Software, telefonía e innovación',
         intro: 'Estudiante de Ingeniería de Software y técnico en telefonía móvil, con más de 7 años de experiencia en microsoldadura y software.',
-        cv: null,             // ej. 'assets/CamiloCastroCV.pdf'
+        cv: 'assets/Hoja_de_Vida_Camilo_Castro.pdf',
         photo: 'assets/camilo/camilo-hoja-de-vida.jpg',
         photoFull: 'assets/camilo/camilo-completa.jpg',
         stats: [              // cifras destacadas
@@ -517,7 +517,11 @@ export const PORTFOLIO: Portfolio = {
           { name: 'Español', level: 'Nativo', detail: 'Lengua materna' },
           { name: 'Inglés', level: 'Intermedio', detail: 'Nivel 5' },
         ],
-        certificates: [],     // { year, title, org, link }
+        certificates: [       // { year, title, org, link, image }
+          { year: 'Jun 2026', title: 'Diplomado en Programación en Java · 120 h', org: 'Politécnico de Colombia', image: 'assets/certificados/diplomado-java.jpg' },
+          { year: 'Dic 2025', title: 'Diplomado en Programación en JavaScript · 120 h', org: 'Politécnico de Colombia', image: 'assets/certificados/diplomado-javascript.jpg' },
+          { year: 'Jun 2020', title: 'Excel Avanzado · 50 h', org: 'Instituto Técnico Comfamiliar Nariño', image: 'assets/certificados/excel-avanzado.jpg' },
+        ],
       },
     },
 

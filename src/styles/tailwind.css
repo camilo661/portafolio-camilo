@@ -403,6 +403,15 @@
   .reel img { display: block; height: 220px; width: auto; aspect-ratio: auto; border-radius: 16px; object-fit: cover; flex: none; }
   @keyframes reel { to { transform: translateX(calc(-50% - 5px)); } }
   @media (max-width: 819px) { .reel img { height: 170px; } }
+  .reel-card {
+    flex: none; width: 260px; display: flex; flex-direction: column; gap: 8px; padding: 8px 8px 12px; border-radius: 18px;
+    background: rgba(255, 255, 255, .42); border: 1px solid rgba(255, 255, 255, .65); text-decoration: none;
+  }
+  .reel .reel-card img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 12px; }
+  .reel-cap { display: flex; flex-direction: column; gap: 2px; padding: 0 4px; }
+  .reel-cap strong { font: 500 13px/1.35 var(--f-disp); color: var(--ink); }
+  .reel-cap em { font: 400 11.5px var(--f-body); font-style: normal; color: var(--mute); }
+  @media (max-width: 819px) { .reel-card { width: 210px; } .reel .reel-card img { height: auto; } }
 
   /* Comentarios públicos (Testimonios) */
   .tst-form { display: grid; gap: 10px; }
@@ -507,6 +516,7 @@
   [data-theme="dark"] .meter-bar i { background: rgba(255, 255, 255, .14); }
   [data-theme="dark"] .panel { box-shadow: 0 40px 90px -30px rgba(0, 0, 0, .85); }
   [data-theme="dark"] :is(.card, .stats div, .proj, .chip) { background: rgba(255, 255, 255, .05); border-color: rgba(255, 255, 255, .09); }
+  [data-theme="dark"] .reel-card { background: rgba(255, 255, 255, .05); border-color: rgba(255, 255, 255, .09); }
   [data-theme="dark"] .tst-form :is(input, textarea) { background: rgba(255, 255, 255, .06); border-color: rgba(255, 255, 255, .12); }
   [data-theme="dark"] .tst-msg.err { color: #e58a80; }
   [data-theme="dark"] .ghost-card, [data-theme="dark"] .todo { background: rgba(255, 255, 255, .025); border-color: rgba(255, 255, 255, .16); }
