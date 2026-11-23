@@ -32,7 +32,17 @@ export const PORTFOLIO: Portfolio = {
         photoFull: 'assets/camilo/camilo-completa.jpg',
         stats: [              // cifras destacadas
           { value: '5.º', label: 'Semestre' },
-          { value: '6', label: 'Lenguajes de programación' },
+          {
+            value: null, label: 'Lenguajes de programación',
+            icons: [
+              { name: 'Java', icon: 'assets/icons/java.svg' },
+              { name: 'Kotlin', icon: 'assets/icons/kotlin.svg' },
+              { name: 'JavaScript', icon: 'assets/icons/javascript.svg' },
+              { name: 'TypeScript', icon: 'assets/icons/typescript.svg' },
+              { name: 'Python', icon: 'assets/icons/python.svg' },
+              { name: 'Swift', icon: 'assets/icons/swift.svg' },
+            ],
+          },
           { value: 'Nivel 5', label: 'Inglés' },
         ],
       },
@@ -76,7 +86,14 @@ export const PORTFOLIO: Portfolio = {
             name: 'Despliegue y control de versiones',
             items: [{ name: 'Git', icon: 'assets/icons/git.svg' }, { name: 'GitHub', icon: 'assets/icons/github.svg', mono: true }, { name: 'Docker', icon: 'assets/icons/docker.svg' }],
           },
-          { name: 'Bases de datos', items: [] },
+          {
+            name: 'Bases de datos',
+            items: [
+              { name: 'MySQL', icon: 'assets/icons/mysql.svg' },
+              { name: 'PostgreSQL', icon: 'assets/icons/postgresql.svg' },
+              { name: 'Firebase', icon: 'assets/icons/firebase.svg' },
+            ],
+          },
           {
             name: 'IA y asistentes',
             items: [
@@ -423,7 +440,9 @@ export const PORTFOLIO: Portfolio = {
       eyebrow: 'Trayectoria', title: 'Experiencia académica',
       data: {
         intro: 'La estructura que lo sostiene todo: mi formación.',
-        items: [],            // { period, kind, title, org, place, link }
+        items: [              // { period, kind, title, org, place, link }
+          { period: '2026', kind: 'Pregrado', title: 'Estudiante de Ingeniería de Software · 5.º semestre', org: 'Universidad Cooperativa de Colombia', place: 'Pasto, Nariño' },
+        ],
       },
     },
 
@@ -434,7 +453,28 @@ export const PORTFOLIO: Portfolio = {
       data: {
         intro: 'La energía acumulada: trabajos, colaboraciones y proyectos.',
         githubAll: null,
-        items: [],            // { date, title, role, kind, description, tech: [], links: [{label, href}] }
+        items: [              // { date, title, role, kind, description, tech: [], links: [{label, href}] }
+          {
+            date: '2025 – 2026', kind: 'Socio', title: 'A&G Solutions', role: 'Socio',
+            description: 'Local de telefonía móvil: venta de equipos y accesorios, y reparación de hardware y software de equipos Android y Apple.',
+          },
+          {
+            date: '2023 – 2025', kind: 'Emprendimiento', title: 'YoReparo.com', role: 'Fundador',
+            description: 'Empresa de reparación de telefonía móvil.',
+          },
+          {
+            date: '2021 – 2022', kind: 'Empleo', title: 'Global Salud', role: 'Encargado de sistemas',
+            description: 'Responsable de los sistemas de la empresa.',
+          },
+          {
+            date: '2020 – 2021', kind: 'Empleo', title: 'Global Salud', role: 'Atención al usuario · Diseño y creación de bases de datos',
+            description: 'Atención al usuario, y diseño y creación de bases de datos contables y de salud.',
+          },
+          {
+            date: '2019', kind: 'Empleo', title: 'Grupo Editorial Protegemos GUC', role: 'Atención al usuario y asesor comercial',
+            description: 'Atención al usuario y asesoría comercial.',
+          },
+        ],
       },
     },
 
@@ -453,12 +493,17 @@ export const PORTFOLIO: Portfolio = {
       eyebrow: 'Más allá del código', title: 'Más de mí',
       data: {
         intro: null,          // 1 línea sobre tus pasatiempos
+        photos: [             // carrusel que se desplaza solo
+          { src: 'assets/camilo/mas-de-mi/microscopio-1.jpg', alt: 'Camilo reparando un teléfono con microsoldadura bajo el microscopio' },
+          { src: 'assets/camilo/mas-de-mi/fachada-ag.jpg', alt: 'Fachada de A&G, local de telefonía y servicio técnico' },
+          { src: 'assets/camilo/mas-de-mi/microscopio-2.jpg', alt: 'Camilo soldando una placa bajo el microscopio en el local' },
+          { src: 'assets/camilo/mas-de-mi/local-ag.jpg', alt: 'Interior del local de A&G con el puesto de reparación' },
+          { src: 'assets/camilo/mas-de-mi/microscopio-3.jpg', alt: 'Camilo trabajando en la placa de un teléfono' },
+        ],
         blocks: [
-          { title: 'Música / pasión principal', text: null, tags: [], groups: [] },  // groups: { name, role, genre, link }
-          { title: 'Arte, escritura o dibujo', text: null, link: null },
-          { title: 'Deportes', text: null },
-          { title: 'Mascotas', text: null },
-          { title: 'Lectura', text: null, books: [] },  // books: { title, author }
+          { title: 'Música', text: 'Estilo urbano y freestyle.' },
+          { title: 'Deportes', text: 'Microfútbol y voleibol.' },
+          { title: 'Mascotas', text: 'Un perro: Michellin.' },
         ],
       },
     },
@@ -472,7 +517,6 @@ export const PORTFOLIO: Portfolio = {
           { name: 'Español', level: 'Nativo', detail: 'Lengua materna' },
           { name: 'Inglés', level: 'Intermedio', detail: 'Nivel 5' },
         ],
-        experiences: [],      // comunicación / monitorías / audiovisual: { year, title, org, kind }
         certificates: [],     // { year, title, org, link }
       },
     },
@@ -483,10 +527,10 @@ export const PORTFOLIO: Portfolio = {
       eyebrow: 'Contacto', title: '¿Creamos algo juntos?',
       data: {
         text: null,           // 1 línea: sobre qué estás abierto a conversar
-        email: null,
-        linkedin: null,
+        email: 'camilocastropsn@gmail.com',
+        linkedin: null,       // falta la URL del perfil, ej. 'https://www.linkedin.com/in/usuario'
         github: 'https://github.com/camilo661',
-        instagram: null,
+        instagram: 'https://www.instagram.com/camilo_acastro',
       },
     },
   ],

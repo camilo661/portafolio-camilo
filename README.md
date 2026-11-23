@@ -50,6 +50,8 @@ npm test             # compila y ejecuta las pruebas de la API (node:test)
 | GET | `/api/portfolio` | Portafolio completo: propietario + 10 secciones |
 | GET | `/api/health` | Estado del servidor (`status`, `uptime`, `timestamp`) |
 | GET | `/api/portfolio/sections/:key` | Una sección (`inicio`, `sobre-mi`, `habilidades`, `proyectos`, `formacion`, `experiencia`, `testimonios`, `mas-de-mi`, `certificados`, `contacto`) |
+| GET | `/api/testimonials` | Comentarios públicos (`open`, `items`) |
+| POST | `/api/testimonials` | Publica un comentario: `name`, `role` (opcional), `text`, `rating` (1–5) |
 
 ## Agregar contenido
 
@@ -62,3 +64,9 @@ La guía [GUIA-DE-CONTENIDO.md](GUIA-DE-CONTENIDO.md) lista todos los datos que 
 ## Despliegue en Vercel
 
 Vercel detecta NestJS automáticamente (`src/main.ts`) y ejecuta `npm run build`, que compila Tailwind y NestJS. Basta con importar el repositorio en Vercel.
+
+## Comentarios públicos
+
+Enlace para pedir comentarios: **https://portafolio-camilo-nest.vercel.app/#comentar** (abre Testimonios con el formulario).
+
+En Vercel se guardan en Upstash Redis: conecta la integración **Upstash for Redis** desde el Marketplace de Vercel al proyecto (crea `KV_REST_API_URL` y `KV_REST_API_TOKEN`) y vuelve a publicar. Sin esas variables el sitio muestra “Los comentarios estarán disponibles muy pronto”. En local se guardan en `data/testimonials.json`.

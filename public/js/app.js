@@ -502,6 +502,16 @@ function start(D) {
   const skillTiles = arr => `<div class="grid grid-cols-3 gap-2 min-[820px]:grid-cols-6">${arr.map(skill).map(it =>
     `<div class="flex flex-col items-center gap-2 rounded-2xl border border-white/70 bg-white/50 px-1 pt-3.5 pb-2.5 dark:border-white/10 dark:bg-white/5">${ico(it, 'size-8')}<span class="font-body text-[11.5px] font-medium text-ink-2">${esc(it.name)}</span></div>`).join('')}</div>`;
   const ext = (href, label, cls = 'link') => `<a class="${cls}" href="${esc(href)}" target="_blank" rel="noopener">${esc(label)}<span>↗</span></a>`;
+  // Testimonios: los fijos del contenido + los comentarios públicos (/api/testimonials)
+  let publicTst = null;
+  const tstCards = fixed => {
+    const pub = (publicTst || []).map(t => ({ ...t, year: String(new Date(t.createdAt).getFullYear()) }));
+    const all = [...pub, ...fixed];
+    if (!all.length) return `<div class="card ghost-card"><p class="quote">“${publicTst ? 'Sé la primera persona en comentar.' : 'Cargando comentarios…'}”</p></div>`;
+    return all.map(t => `<figure class="card"><blockquote>“${esc(t.text)}”</blockquote>
+        <figcaption><strong>${esc(t.name)}</strong>${t.role ? `<span>${esc(t.role)}</span>` : ''}${t.link ? ext(t.link, 'LinkedIn') : ''}</figcaption>
+        <div class="tst-f">${ok(t.rating) ? stars(t.rating) : ''}<span>${esc(t.year || '')}</span></div></figure>`).join('');
+  };
   const stars = n => `<span class="stars" aria-label="${n} de 5">${Array.from({ length: 5 }, (_, i) => `<i class="${i + 1 <= Math.round(n) ? 'on' : ''}"></i>`).join('')}<b>${String(n).replace('.', ',')}</b></span>`;
 
   const RENDER = {
@@ -515,8 +525,11 @@ function start(D) {
         ${o.role ? `<p class="font-body m-0 text-[12px] font-medium tracking-[.14em] text-ac uppercase">${esc(o.role)}</p>` : ''}
         ${d.tagline ? `<p class="hero-tag">${esc(d.tagline)}</p>` : need('Frase titular', '3 a 5 palabras, ej. “Software, diseño y creatividad.”')}
         ${d.intro ? `<p class="lead">${esc(d.intro)}</p>` : need('Presentación corta', '1 o 2 líneas: qué estudias y qué te interesa crear')}`;
-      d.stats.filter(s => !ok(s.value)).forEach(s => need(`Cifra: ${s.label}`, s.label === 'Inglés' ? 'nivel, ej. B1' : 'número'));
-      h += `<div class="stats">${d.stats.map(s => `<div><b>${ok(s.value) ? esc(s.value) : '—'}</b><span>${esc(s.label)}</span></div>`).join('')}</div>`;
+      d.stats.filter(s => !ok(s.value) && !(s.icons && s.icons.length)).forEach(s => need(`Cifra: ${s.label}`, s.label === 'Inglés' ? 'nivel, ej. B1' : 'número'));
+      const statVal = s => (s.icons && s.icons.length
+        ? `<b class="flex! min-h-[30px] flex-wrap items-center gap-1">${s.icons.map(skill).map(it => `<img src="${esc(it.icon)}" alt="${esc(it.name)}" title="${esc(it.name)}" class="size-[18px]${it.mono ? ' dark:invert' : ''}" loading="lazy" decoding="async">`).join('')}</b>`
+        : `<b>${ok(s.value) ? esc(s.value) : '—'}</b>`);
+      h += `<div class="stats">${d.stats.map(s => `<div>${statVal(s)}<span>${esc(s.label)}</span></div>`).join('')}</div>`;
       h += `<div class="meta-row"><span class="pin"></span>${esc(o.location)}</div>`;
       h += `<div class="actions"><button class="btn-solid" data-next>Conoce mi trabajo <span>→</span></button>${d.cv ? ext(d.cv, 'Ver CV', 'btn-glass') : need('Hoja de vida', 'archivo PDF')}</div></div>`;
       return h;
@@ -585,13 +598,19 @@ function start(D) {
       return h;
     },
     testimonials(d) {
-      if (!d.items.length) {
-        need('Testimonios (3 o más)', 'nombre, cargo/profesión, texto, calificación /5, año, LinkedIn opcional');
-        return `<div class="card ghost-card"><p class="quote">“Aquí aparecerán las palabras de quienes han trabajado conmigo.”</p></div>`;
-      }
-      return `<div class="tst">${d.items.map(t => `<figure class="card"><blockquote>“${esc(t.text)}”</blockquote>
-        <figcaption><strong>${esc(t.name)}</strong><span>${esc(t.role)}</span>${t.link ? ext(t.link, 'LinkedIn') : ''}</figcaption>
-        <div class="tst-f">${ok(t.rating) ? stars(t.rating) : ''}<span>${esc(t.year || '')}</span></div></figure>`).join('')}</div>`;
+      return `<p class="lead">¿Has trabajado conmigo? Cuéntame cómo fue: tu comentario se publica aquí.</p>
+        <div class="actions"><button class="btn-solid" data-comment aria-expanded="false" aria-controls="tstForm">Comentar <span>✎</span></button></div>
+        <form id="tstForm" class="card tst-form" hidden novalidate>
+          <label>Nombre<input name="name" required minlength="2" maxlength="60" autocomplete="name"></label>
+          <label>¿Cómo trabajamos juntos? <span class="font-normal opacity-80">(opcional: cliente, compañero, empresa…)</span><input name="role" maxlength="80"></label>
+          <label>Comentario<textarea name="text" required minlength="10" maxlength="600"></textarea></label>
+          <fieldset class="m-0 grid gap-1.5 border-0 p-0"><legend class="font-body mb-1.5 p-0 text-[12px] font-medium text-mute">Calificación</legend>
+            <div class="tst-rate">${[1, 2, 3, 4, 5].map(n => `<input type="radio" name="rating" id="tstR${n}" value="${n}"${n === 5 ? ' checked' : ''}><label for="tstR${n}" aria-label="${n} de 5">★</label>`).join('')}</div>
+          </fieldset>
+          <div class="tst-hp" aria-hidden="true"><label>Sitio web<input name="website" tabindex="-1" autocomplete="off"></label></div>
+          <div class="flex flex-wrap items-center gap-3"><button class="btn-solid" type="submit">Publicar comentario</button><p class="tst-msg" role="status"></p></div>
+        </form>
+        <div class="tst" data-tst-list>${tstCards(d.items)}</div>`;
     },
     more(d) {
       const hints = {
@@ -602,6 +621,10 @@ function start(D) {
         Lectura: 'texto + 3 libros (título, autor)',
       };
       let h = d.intro ? `<p class="lead">${esc(d.intro)}</p>` : need('Introducción de pasatiempos', '1 línea');
+      if (d.photos && d.photos.length) {
+        const imgs = (hide) => d.photos.map(ph => `<img src="${esc(ph.src)}" alt="${hide ? '' : esc(ph.alt)}" loading="lazy" decoding="async"${hide ? ' aria-hidden="true"' : ''}>`).join('');
+        h += `<div class="reel"><div class="reel-track">${imgs(false)}${imgs(true)}</div></div>`;
+      }
       h += `<div class="grid2">${d.blocks.map(b => {
         if (!b.text) { need(b.title, hints[b.title] || 'texto'); return `<div class="card"><h4>${esc(b.title)}</h4><p class="muted">Por contar</p></div>`; }
         return `<div class="card"><h4>${esc(b.title)}</h4><p>${esc(b.text)}</p>${b.tags && b.tags.length ? chips(b.tags) : ''}
@@ -614,8 +637,8 @@ function start(D) {
     learning(d) {
       let h = `<h5 class="sub">Idiomas</h5><div class="grid2">${d.languages.map(l => `<div class="card lang"><h4>${esc(l.name)}</h4><b>${ok(l.level) ? esc(l.level) : '—'}</b>${l.detail ? `<p class="text-mute!">${esc(l.detail)}</p>` : ''}</div>`).join('')}</div>`;
       d.languages.filter(l => !ok(l.level)).forEach(l => need(`Nivel de ${l.name}`, 'ej. A2, B1, B2'));
-      h += `<h5 class="sub">Comunicación y otras experiencias</h5>`;
-      h += d.experiences.length ? `<ol class="tl">${d.experiences.map(e => `<li><div class="tl-k">${esc(e.year)} · ${esc(e.kind)}</div><h4>${esc(e.title)}</h4><p>${esc(e.org)}</p></li>`).join('')}</ol>`
+      if (d.experiences) h += `<h5 class="sub">Comunicación y otras experiencias</h5>`;
+      if (d.experiences) h += d.experiences.length ? `<ol class="tl">${d.experiences.map(e => `<li><div class="tl-k">${esc(e.year)} · ${esc(e.kind)}</div><h4>${esc(e.title)}</h4><p>${esc(e.org)}</p></li>`).join('')}</ol>`
         : `<p class="muted">Por cargar</p>${need('Otras experiencias', 'monitorías, audiovisual, moderación, voluntariado: año, título, entidad, tipo')}`;
       h += `<h5 class="sub">Certificados adicionales</h5>`;
       h += d.certificates.length ? `<ol class="tl">${d.certificates.map(c => `<li><div class="tl-k">${esc(c.year)}</div><h4>${esc(c.title)}</h4><p>${esc(c.org)}</p>${c.link ? ext(c.link, 'Ver certificado') : ''}</li>`).join('')}</ol>`
@@ -653,7 +676,56 @@ function start(D) {
     $('#pnNext em').textContent = shortName(SECTIONS[(i + 1) % n]);
     pnScroll.scrollTop = 0;
     reticleTag.textContent = s.part;
+    if (s.type === 'testimonials') loadTestimonials(s);
   }
+
+  /* ───────────── Comentarios públicos ───────────── */
+  let tstOpen = true;
+  function paintTestimonials(s) {
+    const list = $('[data-tst-list]', pnBody);
+    if (list) list.innerHTML = tstCards(s.data.items);
+    const btn = $('[data-comment]', pnBody);
+    if (btn && !tstOpen) btn.closest('.actions').innerHTML = '<p class="muted m-0">Los comentarios estarán disponibles muy pronto.</p>';
+  }
+  function loadTestimonials(s) {
+    fetch('/api/testimonials')
+      .then(r => (r.ok ? r.json() : Promise.reject(new Error(`API ${r.status}`))))
+      .then(res => { publicTst = res.items || []; tstOpen = res.open !== false; })
+      .catch(err => { console.error('No se pudieron cargar los comentarios:', err); publicTst = publicTst || []; })
+      .then(() => { if (current && sec(current) === s) paintTestimonials(s); });
+  }
+  function openCommentForm(show = true) {
+    const form = $('#tstForm', pnBody), btn = $('[data-comment]', pnBody);
+    if (!form || !btn) return;
+    form.hidden = !show;
+    btn.setAttribute('aria-expanded', String(show));
+    if (show) { form.scrollIntoView({ block: 'nearest', behavior: 'smooth' }); setTimeout(() => form.elements.namedItem("name").focus({ preventScroll: true }), 350); }
+  }
+  document.addEventListener('submit', e => {
+    const form = e.target.closest('#tstForm');
+    if (!form) return;
+    e.preventDefault();
+    const msg = $('.tst-msg', form), send = $('button[type="submit"]', form);
+    const say = (t, err) => { msg.textContent = t; msg.classList.toggle('err', !!err); };
+    const f = n => form.elements.namedItem(n), data = {
+      name: f("name").value.trim(), role: f("role").value.trim(), text: f("text").value.trim(),
+      rating: Number(form.querySelector('input[name="rating"]:checked')?.value || 0), website: f("website").value,
+    };
+    if (data.name.length < 2) { say('Escribe tu nombre.', true); f('name').focus(); return; }
+    if (data.text.length < 10) { say('El comentario debe tener al menos 10 caracteres.', true); f('text').focus(); return; }
+    send.disabled = true; say('Publicando…');
+    fetch('/api/testimonials', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) })
+      .then(async r => {
+        const res = await r.json().catch(() => ({}));
+        if (!r.ok) throw new Error(Array.isArray(res.message) ? res.message[0] : res.message || 'No se pudo publicar el comentario.');
+        if (res.item) publicTst = [res.item, ...(publicTst || [])];
+        form.reset(); say('¡Gracias! Tu comentario ya está publicado.');
+        const s = sec(current);
+        if (s && s.type === 'testimonials') { const list = $('[data-tst-list]', pnBody); if (list) list.innerHTML = tstCards(s.data.items); }
+      })
+      .catch(err => say(err.message, true))
+      .finally(() => { send.disabled = false; });
+  });
 
   /* ───────────── Estado ───────────── */
   let mode = 'assembled', current = null, hot = null;
@@ -741,6 +813,8 @@ function start(D) {
       $$('[data-img]', card).forEach(b => b.classList.toggle('on', b === img));
       return;
     }
+    const cbtn = e.target.closest('[data-comment]');
+    if (cbtn) { openCommentForm(cbtn.getAttribute('aria-expanded') !== 'true'); return; }
     if (e.target.closest('[data-next]')) { step(1); return; }
     if (e.target.closest('[data-home]')) { e.preventDefault(); if (mode !== 'assembled') assemble(); return; }
     if (e.target.closest('[data-explore]')) { overview(); return; }
@@ -754,6 +828,7 @@ function start(D) {
   $('#btnTour').addEventListener('click', () => focus(SECTIONS[0].hs));
   $('#btnAssemble').addEventListener('click', () => (mode === 'assembled' ? overview() : assemble()));
   document.addEventListener('keydown', e => {
+    if (e.target.closest && e.target.closest('input, textarea, select, [contenteditable]')) return;
     if (e.key === 'Escape' && mode !== 'overview') overview();
     else if (e.key === 'ArrowRight') step(1);
     else if (e.key === 'ArrowLeft') step(-1);
@@ -847,8 +922,10 @@ function start(D) {
       body.classList.remove('is-loading', 'no-anim');
       body.classList.add('is-intro');
       setMode('assembled');
-      const target = SECTIONS.find(s => '#' + s.key === location.hash);
-      if (target) setTimeout(() => focus(target.hs), 600);
+      // Enlace público para dejar un comentario: /#comentar
+      const wantsComment = location.hash === '#comentar';
+      const target = wantsComment ? SECTIONS.find(s => s.type === 'testimonials') : SECTIONS.find(s => '#' + s.key === location.hash);
+      if (target) setTimeout(() => { focus(target.hs); if (wantsComment) setTimeout(() => openCommentForm(true), 700); }, 600);
       setTimeout(() => body.classList.remove('is-intro'), 2400);
     };
     requestAnimationFrame(load);

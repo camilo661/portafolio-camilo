@@ -6,3 +6,4 @@ public/css/styles.css
 .vercel
 *.log
 *.tsbuildinfo
+data/

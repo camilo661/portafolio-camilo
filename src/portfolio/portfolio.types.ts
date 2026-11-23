@@ -35,7 +35,8 @@ export interface HeroData {
   photo: Maybe<string>;
   /** Foto de cuerpo completo (portada) */
   photoFull: Maybe<string>;
-  stats: { value: Maybe<string>; label: string }[];
+  /** Cifra destacada; con `icons` se muestran íconos en lugar del número */
+  stats: { value: Maybe<string>; label: string; icons?: SkillItem[] }[];
 }
 export interface AboutData { headline: Maybe<string>; paragraphs: string[]; focus: string[] }
 export interface SkillItem {
@@ -73,11 +74,15 @@ export interface WorkData {
   githubAll: Maybe<string>;
   items: { date: string; title: string; role: string; kind: string; description: string; tech?: string[]; links?: Link[] }[];
 }
+export interface Testimonial { name: string; role: string; link?: string; text: string; rating: number; year: string }
 export interface TestimonialsData {
-  items: { name: string; role: string; link?: string; text: string; rating: number; year: string }[];
+  /** Testimonios fijos; los comentarios públicos se cargan desde /api/testimonials */
+  items: Testimonial[];
 }
 export interface MoreData {
   intro: Maybe<string>;
+  /** Carrusel de fotos que se desplaza solo */
+  photos?: Image[];
   blocks: {
     title: string;
     text: Maybe<string>;
@@ -89,7 +94,8 @@ export interface MoreData {
 }
 export interface LearningData {
   languages: { name: string; level: Maybe<string>; detail?: string }[];
-  experiences: { year: string; title: string; org: string; kind: string }[];
+  /** Opcional: si no existe, el bloque no se muestra */
+  experiences?: { year: string; title: string; org: string; kind: string }[];
   certificates: { year: string; title: string; org: string; link?: string }[];
 }
 export interface ContactData {
