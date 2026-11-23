@@ -527,7 +527,7 @@ function start(D) {
         ${d.intro ? `<p class="lead">${esc(d.intro)}</p>` : need('Presentación corta', '1 o 2 líneas: qué estudias y qué te interesa crear')}`;
       d.stats.filter(s => !ok(s.value) && !(s.icons && s.icons.length)).forEach(s => need(`Cifra: ${s.label}`, s.label === 'Inglés' ? 'nivel, ej. B1' : 'número'));
       const statVal = s => (s.icons && s.icons.length
-        ? `<b class="flex! min-h-[30px] flex-wrap items-center gap-1">${s.icons.map(skill).map(it => `<img src="${esc(it.icon)}" alt="${esc(it.name)}" title="${esc(it.name)}" class="size-[18px]${it.mono ? ' dark:invert' : ''}" loading="lazy" decoding="async">`).join('')}</b>`
+        ? `<b class="flex! min-h-[30px] flex-wrap items-center gap-1.5">${s.icons.map(skill).map(it => `<img src="${esc(it.icon)}" alt="${esc(it.name)}" title="${esc(it.name)}" class="size-3.5 shrink-0 opacity-85 ${it.mono ? 'dark:invert' : ''}" loading="lazy" decoding="async">`).join('')}</b>`
         : `<b>${ok(s.value) ? esc(s.value) : '—'}</b>`);
       h += `<div class="stats">${d.stats.map(s => `<div>${statVal(s)}<span>${esc(s.label)}</span></div>`).join('')}</div>`;
       h += `<div class="meta-row"><span class="pin"></span>${esc(o.location)}</div>`;
