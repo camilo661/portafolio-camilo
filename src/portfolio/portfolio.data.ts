@@ -2,7 +2,7 @@
    CONTENIDO DEL PORTAFOLIO — Camilo Andrés Castro Acosta
    --------------------------------------------------------------------------
    Todo el texto vive aquí y lo entrega la API en GET /api/portfolio.
-   Lo que esté en null o en [] aparece en el sitio como "Por completar".
+   Lo que esté en null o en [] no se muestra en el sitio.
    Consulta GUIA-DE-CONTENIDO.md para saber qué reunir.
    ========================================================================== */
 
@@ -155,7 +155,13 @@ export const PORTFOLIO: Portfolio = {
             description:
               'Traductor de llamadas en tiempo real para Android. Llamas o contestas como siempre y en pantalla ves, en español y palabra a palabra, lo que dice la otra persona en inglés o chino. Quien te llama puede hacerlo desde el navegador con un enlace o un código QR, sin instalar nada. La voz se reconoce y se traduce dentro del teléfono, y cada llamada queda grabada con su traducción.',
             tech: ['Kotlin', 'Jetpack Compose', 'Vosk', 'ML Kit', 'WebRTC', 'Firebase'],
-            images: [],
+            frame: 'phone',
+            images: [
+              { src: 'assets/traduya/traduya-teclado.jpg', alt: 'Teclado de Traduya con el acceso a la llamada traducida' },
+              { src: 'assets/traduya/traduya-historial.jpg', alt: 'Historial de llamadas de Traduya con el idioma detectado y las traducciones' },
+              { src: 'assets/traduya/traduya-ajustes.jpg', alt: 'Ajustes de Traduya: traducir llamadas normales con Shizuku y llamadas por WiFi' },
+              { src: 'assets/traduya/traduya-idiomas.jpg', alt: 'Ajustes de Traduya durante la llamada e idiomas de voz y traducción' },
+            ],
             links: [
               { label: 'Descargar APK', href: 'https://github.com/camilo661/Traduya/releases/download/v1.9.0/Traduya-1.9.0.apk', kind: 'download', primary: true },
               { label: 'Portal web: llamar por Wi‑Fi', href: 'https://traduya-66592.web.app', kind: 'demo' },
@@ -533,7 +539,7 @@ export const PORTFOLIO: Portfolio = {
       data: {
         text: 'Trabajo con honestidad: te digo lo que se puede hacer y lo cumplo. ¿Tienes un proyecto o un equipo por revisar? Hablemos.',
         email: 'camilocastropsn@gmail.com',
-        linkedin: null,       // falta la URL del perfil, ej. 'https://www.linkedin.com/in/usuario'
+        linkedin: 'https://www.linkedin.com/in/camilo-castro-552043270',
         github: 'https://github.com/camilo661',
         instagram: 'https://www.instagram.com/camilo_acastro',
       },

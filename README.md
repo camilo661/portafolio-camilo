@@ -57,7 +57,7 @@ npm test             # compila y ejecuta las pruebas de la API (node:test)
 
 1. Edita `src/portfolio/portfolio.data.ts`.
 2. Coloca imágenes y archivos en `public/assets/`.
-3. Lo que quede en `null` o `[]` aparece en el sitio como **Por completar**.
+3. Lo que quede en `null` o `[]` no se muestra en el sitio.
 
 La guía [GUIA-DE-CONTENIDO.md](GUIA-DE-CONTENIDO.md) lista todos los datos que hay que reunir.
 

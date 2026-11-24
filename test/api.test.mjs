@@ -45,6 +45,7 @@ test('GET /api/portfolio/sections/proyectos: proyectos principales y otros proye
   const { data } = await res.json();
   assert.deepEqual(data.items.map((p) => p.title), ['Conclave', 'TuControl', 'Traduya', 'Turbo Ratas']);
   assert.ok(data.others.length > 0);
+  for (const p of data.items) assert.ok(p.images.length > 0, `${p.title} no tiene capturas`);
   // Los otros proyectos solo llevan imagen si tienen demo publicada
   for (const p of data.others) {
     if (p.images.length) assert.ok(p.links.some((l) => l.kind === 'demo'), `${p.title} tiene imagen sin demo`);

@@ -482,7 +482,7 @@ function start(D) {
     const w = p.frame === 'watch';
     if (p.images.length < 2) return `<div class="proj-main"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}"></div>`;
     const imgs = hide => p.images.map(im => `<img src="${esc(im.src)}" alt="${hide ? '' : esc(im.alt)}" loading="lazy" decoding="async"${hide ? ' aria-hidden="true"' : ''}${w ? ' class="aspect-square! rounded-full! ring-4 ring-[#2a3440]"' : ''}>`).join('');
-    return `<div class="reel proj-reel${w ? ' is-watch' : ''}"><div class="reel-track">${imgs(false)}${imgs(true)}</div></div>`;
+    return `<div class="reel proj-reel${w ? ' is-watch' : ''}${p.frame === 'phone' ? ' is-phone' : ''}"><div class="reel-track">${imgs(false)}${imgs(true)}</div></div>`;
   };
   const shotsSoon = p => `<div class="proj-main grid! place-content-center justify-items-center gap-2 border-b border-dashed border-line-2 bg-white/25! text-mute dark:bg-white/5!" role="img" aria-label="Espacio para las capturas de ${esc(p.title)}">
             <svg viewBox="0 0 24 24" class="size-8 opacity-60" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 6l1.5-2.5h3L15 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
@@ -647,7 +647,7 @@ function start(D) {
       let h = d.text ? `<p class="lead">${esc(d.text)}</p>` : need('Frase de contacto', 'sobre qué estás abierto a conversar');
       h += `<div class="rows">${rows.map(([k, v, href]) => v
         ? `<a class="row" href="${esc(href)}" target="_blank" rel="noopener"><em>${k}</em><span>${esc(v.replace(/^https?:\/\/(www\.)?/, ''))}</span><b>↗</b></a>`
-        : `<div class="row"><em>${k}</em><span class="muted">Por configurar</span></div>${need(k, k === 'Correo' ? 'correo de contacto' : 'enlace al perfil')}`).join('')}</div>`;
+        : '').join('')}</div>`;
       h += `<p class="fine">© ${new Date().getFullYear()} ${esc(D.owner.name)} · Diseñado y desarrollado en Pasto, Colombia.</p>`;
       return h;
     },
@@ -658,7 +658,6 @@ function start(D) {
     const html = RENDER[s.type](s.data, s);
     return { html, todo: todo.slice() };
   }
-  const STATUS = SECTIONS.map(renderSection);
 
   const panel = $('#panel'), pnBody = $('#pnBody'), pnScroll = $('#pnScroll');
   function renderPanel(hs) {
@@ -667,7 +666,7 @@ function start(D) {
     $('#pnCode').textContent = `${pad2(i + 1)} · ${s.part}`;
     $('#pnEyebrow').textContent = s.eyebrow;
     $('#pnTitle').textContent = s.title;
-    pnBody.innerHTML = st.html + (st.todo.length ? `<div class="todo"><div class="todo-h"><span class="pulse"></span>Por completar <b>${st.todo.length}</b></div><ul>${st.todo.map(t => `<li><strong>${esc(t.label)}</strong><span>${esc(t.hint)}</span></li>`).join('')}</ul></div>` : '');
+    pnBody.innerHTML = st.html;
     $('#pnCount').textContent = `${pad2(i + 1)} / ${pad2(n)}`;
     $('#pnPrev em').textContent = shortName(SECTIONS[(i - 1 + n) % n]);
     $('#pnNext em').textContent = shortName(SECTIONS[(i + 1) % n]);
@@ -832,10 +831,7 @@ function start(D) {
   }
   const step = d => { const n = SECTIONS.length, i = current ? IDX[current] : -1; focus(SECTIONS[(i + d + n) % n].hs); };
 
-  /* ───────────── Medidor + dock ───────────── */
-  const doneCount = STATUS.filter(s => !s.todo.length).length;
-  $('#meter').innerHTML = `<span class="meter-txt">Contenido <b>${doneCount}/${SECTIONS.length}</b></span><span class="meter-bar">${SECTIONS.map((s, i) =>
-    `<i class="${!STATUS[i].todo.length ? 'done' : ''}" title="${esc(shortName(s))} · ${STATUS[i].todo.length ? STATUS[i].todo.length + ' pendientes' : 'completo'}"></i>`).join('')}</span>`;
+  /* ───────────── Dock ───────────── */
   $('#dock').innerHTML = SECTIONS.map((s, i) => `<button data-hs="${s.hs}"><span>${pad2(i + 1)}</span>${esc(shortName(s))}</button>`).join('');
 
   /* ───────────── Eventos ───────────── */

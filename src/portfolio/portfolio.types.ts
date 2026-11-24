@@ -54,8 +54,8 @@ export interface Project {
   tech: string[];
   images: Image[];
   links: Link[];
-  /** 'watch': capturas cuadradas de reloj redondo; se muestran como esfera */
-  frame?: 'watch';
+  /** 'watch': capturas cuadradas de reloj redondo (esfera) · 'phone': capturas verticales de teléfono */
+  frame?: 'watch' | 'phone';
 }
 export interface ProjectsData {
   intro: Maybe<string>;
