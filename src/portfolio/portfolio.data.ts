@@ -158,6 +158,7 @@ export const PORTFOLIO: Portfolio = {
             images: [],
             links: [
               { label: 'Descargar APK', href: 'https://github.com/camilo661/Traduya/releases/download/v1.9.0/Traduya-1.9.0.apk', kind: 'download', primary: true },
+              { label: 'Portal web: llamar por Wi‑Fi', href: 'https://traduya-66592.web.app', kind: 'demo' },
               { label: 'Ver en GitHub', href: 'https://github.com/camilo661/Traduya', kind: 'github' },
             ],
           },
@@ -492,7 +493,7 @@ export const PORTFOLIO: Portfolio = {
       hs: 'camera', part: 'Cámaras', key: 'mas-de-mi', type: 'more', accent: 'sand',
       eyebrow: 'Más allá del código', title: 'Más de mí',
       data: {
-        intro: null,          // 1 línea sobre tus pasatiempos
+        intro: 'Entre semana, el microscopio y el código; en mis ratos libres, la cancha y la música.',
         photos: [             // carrusel que se desplaza solo
           { src: 'assets/camilo/mas-de-mi/microscopio-1.jpg', alt: 'Camilo reparando un teléfono con microsoldadura bajo el microscopio' },
           { src: 'assets/camilo/mas-de-mi/fachada-ag.jpg', alt: 'Fachada de A&G, local de telefonía y servicio técnico' },
@@ -530,7 +531,7 @@ export const PORTFOLIO: Portfolio = {
       hs: 'modem', part: 'Antenas', key: 'contacto', type: 'contact', accent: 'teal',
       eyebrow: 'Contacto', title: '¿Creamos algo juntos?',
       data: {
-        text: null,           // 1 línea: sobre qué estás abierto a conversar
+        text: 'Trabajo con honestidad: te digo lo que se puede hacer y lo cumplo. ¿Tienes un proyecto o un equipo por revisar? Hablemos.',
         email: 'camilocastropsn@gmail.com',
         linkedin: null,       // falta la URL del perfil, ej. 'https://www.linkedin.com/in/usuario'
         github: 'https://github.com/camilo661',

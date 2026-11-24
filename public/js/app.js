@@ -478,18 +478,11 @@ function start(D) {
       : 'border border-glass-b bg-glass text-ink hover:bg-glass-2';
     return `<a href="${esc(l.href)}"${local && l.kind === 'download' ? ' download' : ' target="_blank" rel="noopener"'} class="font-disp inline-flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[12.5px] font-medium no-underline transition ${tone}">${l.kind ? `<svg viewBox="0 0 24 24" class="size-3.5" aria-hidden="true">${ICON[l.kind]}</svg>` : ''}${esc(l.label)}</a>`;
   };
-  // Reloj redondo: la captura cuadrada se recorta como esfera con bisel
-  const WATCH = {
-    main: 'relative bg-[radial-gradient(circle_at_50%_45%,#1d2733,#101521_70%)]!',
-    face: 'absolute inset-0 m-auto h-[80%]! w-auto! aspect-square rounded-full ring-[6px] ring-[#2a3440] shadow-[0_0_0_9px_#11161d,0_18px_40px_-12px_rgba(0,0,0,.8)]',
-    thumb: 'aspect-square! rounded-full! w-[72%] justify-self-center',
-  };
   const gallery = p => {
     const w = p.frame === 'watch';
-    return `<div class="proj-media">
-            <div class="proj-main ${w ? WATCH.main : ''}"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}" class="${w ? WATCH.face : ''}" data-main></div>
-            ${p.images.length > 1 ? `<div class="proj-thumbs">${p.images.map((im, j) => `<button class="${j ? '' : 'on'} ${w ? WATCH.thumb : ''}" data-img="${j}" aria-label="Ver captura ${j + 1}"><img src="${esc(im.src)}" alt="" loading="lazy"></button>`).join('')}</div>` : ''}
-          </div>`;
+    if (p.images.length < 2) return `<div class="proj-main"><img src="${esc(p.images[0].src)}" alt="${esc(p.images[0].alt)}"></div>`;
+    const imgs = hide => p.images.map(im => `<img src="${esc(im.src)}" alt="${hide ? '' : esc(im.alt)}" loading="lazy" decoding="async"${hide ? ' aria-hidden="true"' : ''}${w ? ' class="aspect-square! rounded-full! ring-4 ring-[#2a3440]"' : ''}>`).join('');
+    return `<div class="reel proj-reel${w ? ' is-watch' : ''}"><div class="reel-track">${imgs(false)}${imgs(true)}</div></div>`;
   };
   const shotsSoon = p => `<div class="proj-main grid! place-content-center justify-items-center gap-2 border-b border-dashed border-line-2 bg-white/25! text-mute dark:bg-white/5!" role="img" aria-label="Espacio para las capturas de ${esc(p.title)}">
             <svg viewBox="0 0 24 24" class="size-8 opacity-60" aria-hidden="true"><rect x="3" y="6" width="18" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="13" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M9 6l1.5-2.5h3L15 6" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
@@ -681,6 +674,48 @@ function start(D) {
     pnScroll.scrollTop = 0;
     reticleTag.textContent = s.part;
     if (s.type === 'testimonials') loadTestimonials(s);
+    if (s.type === 'hero') dropIcons('.stats img');
+    if (s.type === 'skills') dropIcons('.card img');
+  }
+
+  const reduceMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ───────────── Logos: caen desde los bordes de la pantalla y se ubican ───────────── */
+  function dropIcons(sel) {
+    const icons = $$(sel, pnBody);
+    if (!icons.length || reduceMotion()) return;
+    const ends = icons.map(i => getComputedStyle(i).opacity);
+    const step = Math.min(90, 900 / icons.length);
+    icons.forEach(i => { i.style.opacity = '0'; });
+    const restore = () => icons.forEach(i => { i.style.opacity = ''; });
+    // Espera a que el panel termine de entrar (posición estable varios cuadros seguidos)
+    let last = '', still = 0;
+    const t0 = performance.now();
+    const wait = () => {
+      if (!icons[0].isConnected) return;
+      const r = icons[0].getBoundingClientRect(), key = `${r.left.toFixed(1)},${r.top.toFixed(1)}`;
+      still = key === last ? still + 1 : 0; last = key;
+      if (still < 3 && performance.now() - t0 < 2500) { requestAnimationFrame(wait); return; }
+      if (!r.width) { restore(); return; }
+      const n = icons.length, cx = innerWidth / 2, cy = innerHeight / 2, far = Math.hypot(innerWidth, innerHeight) * 0.6;
+      icons.forEach((img, k) => {
+        const q = img.getBoundingClientRect();
+        const a = (k / n) * Math.PI * 2 + Math.random() * 0.8 - Math.PI / 2;
+        const dx = cx + Math.cos(a) * far - (q.left + q.width / 2), dy = cy + Math.sin(a) * far - (q.top + q.height / 2);
+        const g = document.createElement('img');
+        g.src = img.src; g.alt = ''; g.setAttribute('aria-hidden', 'true');
+        Object.assign(g.style, { position: 'fixed', left: `${q.left}px`, top: `${q.top}px`, width: `${q.width}px`, height: `${q.height}px`, zIndex: 100, pointerEvents: 'none' });
+        document.body.appendChild(g);
+        const rot = (Math.random() * 2 - 1) * 420, sc = 2.4 + Math.random() * 1.4;
+        const done = () => { img.style.opacity = ''; g.parentNode && g.parentNode.removeChild(g); };
+        g.animate([
+          { transform: `translate(${dx}px,${dy}px) rotate(${rot}deg) scale(${sc})`, opacity: 0 },
+          { opacity: 1, offset: 0.2 },
+          { transform: 'none', opacity: ends[k] },
+        ], { duration: 1150, delay: k * step, easing: 'cubic-bezier(.22,1.15,.36,1)', fill: 'backwards' }).finished.then(done, done);
+      });
+    };
+    requestAnimationFrame(wait);
   }
 
   /* ───────────── Comentarios públicos ───────────── */
@@ -810,13 +845,6 @@ function start(D) {
     setHot(t ? t.dataset.hs : null);
   });
   document.addEventListener('click', e => {
-    const img = e.target.closest('[data-img]');
-    if (img) {
-      const card = img.closest('.proj');
-      $('[data-main]', card).src = $('img', img).getAttribute('src');
-      $$('[data-img]', card).forEach(b => b.classList.toggle('on', b === img));
-      return;
-    }
     const cbtn = e.target.closest('[data-comment]');
     if (cbtn) { openCommentForm(cbtn.getAttribute('aria-expanded') !== 'true'); return; }
     if (e.target.closest('[data-next]')) { step(1); return; }
